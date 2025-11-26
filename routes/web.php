@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EmpleadoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,3 +26,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/empleados', [EmpleadoController::class, 'index'])->name('empleados.index');
+
+    Route::get('/empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create');
+    Route::post('/empleados', [EmpleadoController::class, 'store'])->name('empleados.store');
+    Route::get('/empleados/{empleado}/edit', [EmpleadoController::class, 'edit'])->name('empleados.edit');
+    Route::put('/empleados/{empleado}', [EmpleadoController::class, 'update'])->name('empleados.update');
+    //Route::delete('/empleados/{empleado}', [EmpleadoController::class, 'destroy'])->name('empleados.destroy');
+});
+
+
