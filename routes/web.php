@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmpleadoController;
-use App\Http\Controllers\PeridoController;
+use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\ConvocatoriaController;
 
 use Illuminate\Foundation\Application;
@@ -40,15 +40,21 @@ Route::middleware('auth')->group(function () {
     Route::put('/empleados/{empleado}', [EmpleadoController::class, 'update'])->name('empleados.update');
     //Route::delete('/empleados/{empleado}', [EmpleadoController::class, 'destroy'])->name('empleados.destroy');
 
-
-    // Rutas para Peridos
-    Route::resource('peridos', PeridoController::class);
-
+ 
+    Route::get('/periodos', [PeriodoController::class, 'index'])->name('periodos.index');
+    Route::get('/periodos/create', [PeriodoController::class, 'create'])->name('periodos.create');
+    Route::post('/periodos', [PeriodoController::class, 'store'])->name('periodos.store');
+    Route::get('/periodos/{periodo}/edit', [PeriodoController::class, 'edit'])->name('periodos.edit');
+    Route::put('/periodos/{periodo}', [PeriodoController::class, 'update'])->name('periodos.update');
+    //Route::delete('/periodos/{periodo}', [PeriodoController::class, 'destroy'])->name('periodos.destroy');
 
     
-    // Rutas para Convocatorias
-    Route::resource('convocatorias', ConvocatoriaController::class);
+   
+   
 });
+
+
+
 
 
 

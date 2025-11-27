@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Perido;
+use App\Models\Permiso_usuario;
 use Illuminate\Http\Request;
 
-class PeridoController extends Controller
+class PermisoUsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PeridoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Perido $perido)
+    public function show(Permiso_usuario $permiso_usuario)
     {
         //
     }
@@ -42,7 +42,7 @@ class PeridoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Perido $perido)
+    public function edit(Permiso_usuario $permiso_usuario)
     {
         //
     }
@@ -50,7 +50,7 @@ class PeridoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Perido $perido)
+    public function update(Request $request, Permiso_usuario $permiso_usuario)
     {
         //
     }
@@ -58,7 +58,7 @@ class PeridoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Perido $perido)
+    public function destroy(Permiso_usuario $permiso_usuario)
     {
         //
     }
