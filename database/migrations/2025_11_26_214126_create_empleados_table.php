@@ -29,7 +29,7 @@ return new class extends Migration
 
             $table->string('puesto');
             
-                $table->string('acreditacion_cuip');
+                $table->string('acreditacion_cuip')->nullable();
                 $table->date('acreditacion_cuip_fecha')->nullable();
 
                 $table->boolean('acreditacion_formacion');
