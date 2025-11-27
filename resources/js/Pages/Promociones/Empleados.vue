@@ -58,7 +58,7 @@
                         <td 
                             v-for="cell in row.getVisibleCells()" 
                             :key="cell.id"
-                            class="border border-gray-300 px-2 py-0.5"
+                            class="border border-gray-300 px-2 py-0.5 text-[13px]"
                         >
                             <FlexRender
                                 :render="cell.column.columnDef.cell"
@@ -175,7 +175,7 @@ const columns = [
             [
                 h('button',
                     {
-                        class: 'bg-sky-700 text-white px-2 py-1 rounded hover:bg-sky-600',
+                        class: 'bg-sky-700 text-white px-2 _py-1 rounded hover:bg-sky-600',
                         onClick: () => verDetalles(row.original),
                         title: 'Ver detalles del empleado'
                     },
@@ -183,7 +183,7 @@ const columns = [
                 ),
                 h('button',
                     {
-                        class: 'bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600',
+                        class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
                         onClick: () => editarEmpleado(row.original),
                         title: 'Editar empleado'
                     },
@@ -191,7 +191,7 @@ const columns = [
                 ),
                 row.original.telefono ? h('button',
                     {
-                        class: 'bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700',
+                        class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
                         onClick: () => imprimirEmpleado(row.original),
                         title: 'Imprimir información del empleado'
                     },
