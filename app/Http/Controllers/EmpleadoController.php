@@ -35,7 +35,15 @@ class EmpleadoController extends Controller
     {
        
        //grabar la informacion
-        Empleado::create($request->all());
+       // modificar el contenido del $request para poner todos los campos de timpo text o string a mayusculas 
+       $input = $request->all();
+       foreach ($input as $key => $value) {
+           if (is_string($value)) {
+               $input[$key] = strtoupper($value);
+           }
+       }
+       
+        Empleado::create($input);
         return redirect()->route('empleados.index')->with('success', 'Empleado grabado correctamente');
        
     }
@@ -53,7 +61,8 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        //
+        $empleado=Empleado::findOrFail($empleado->id);
+         return inertia('Promociones/Empleados_captura', ['c_empleados' => $empleado]);
     }
 
     /**
@@ -62,6 +71,15 @@ class EmpleadoController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
         //
+        $input = $request->all();
+        foreach ($input as $key => $value) {
+            if (is_string($value)) {
+                $input[$key] = strtoupper($value);
+            }
+        }
+
+        $empleado->update($input);
+        return redirect()->route('empleados.index')->with('success', 'Empleado actualizado correctamente'); 
     }
 
     /**

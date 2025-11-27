@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\PeridoController;
+use App\Http\Controllers\ConvocatoriaController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +39,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/empleados/{empleado}/edit', [EmpleadoController::class, 'edit'])->name('empleados.edit');
     Route::put('/empleados/{empleado}', [EmpleadoController::class, 'update'])->name('empleados.update');
     //Route::delete('/empleados/{empleado}', [EmpleadoController::class, 'destroy'])->name('empleados.destroy');
+
+
+    // Rutas para Peridos
+    Route::resource('peridos', PeridoController::class);
+
+
+    
+    // Rutas para Convocatorias
+    Route::resource('convocatorias', ConvocatoriaController::class);
 });
+
 
 

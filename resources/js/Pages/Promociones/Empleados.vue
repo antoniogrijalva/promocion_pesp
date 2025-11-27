@@ -2,8 +2,8 @@
     <authenticated-layout>
         <main class="container mx-auto mt-4">
             <div class="flex justify-between items-center mb-2">
-                <h1 class="font-bold text-xl">Personal Operativo</h1>
-                <button @click="agregarEmpleado" class="bg-green-500 text-white px-4 py-2 rounded">
+                <h1 class="font-bold text-2xl">Personal Operativo</h1>
+                <button @click="agregarEmpleado" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
                     + Agregar Empleado
                 </button>
             </div>
@@ -18,7 +18,7 @@
                 />
                 <select 
                     v-model="pageSize" 
-                    class="border border-gray-300 rounded px-4 py-2"
+                    class="border border-gray-300 rounded px-7 text-sm py-2"
                     @change="table.setPageSize(Number($event.target.value))"
                 >
                     <option :value="10">mostrar 10 </option>
@@ -34,7 +34,7 @@
                         <th 
                             v-for="header in headerGroup.headers" 
                             :key="header.id"
-                            class="border border-gray-300 px-4 py-2 cursor-pointer"
+                            class="border border-gray-300 px-4 py-1 cursor-pointer hover:bg-slate-700 text-sm"
                             @click="header.column.getToggleSortingHandler()?.($event)"
                         >
                             <div class="flex items-center justify-between">
@@ -71,7 +71,7 @@
 
             <!-- Paginación -->
             <div class="mt-4 flex items-center justify-between">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm text-slate-800">
                     Mostrando {{ table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1 }} 
                     a {{ Math.min((table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize, empleados.length) }} 
                     de {{ empleados.length }} empleados
@@ -93,7 +93,7 @@
                         ← Anterior
                     </button>
                     
-                    <span class="px-3 py-1 flex items-center text-sky-500">
+                    <span class="px-3 py-1 flex items-center text-sky-700">
                         Página {{ table.getState().pagination.pageIndex + 1 }} de {{ table.getPageCount() }}
                     </span>
                     
@@ -173,14 +173,14 @@ const columns = [
             'div',
             { class: 'flex gap-2' },
             [
-                h('button',
+                /*h('button',
                     {
                         class: 'bg-sky-700 text-white px-2 _py-1 rounded hover:bg-sky-600',
                         onClick: () => verDetalles(row.original),
                         title: 'Ver detalles del empleado'
                     },
                     h('i', { class: 'fas fa-sm fa-eye' })
-                ),
+                ),*/
                 h('button',
                     {
                         class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
@@ -193,7 +193,7 @@ const columns = [
                     {
                         class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
                         onClick: () => imprimirEmpleado(row.original),
-                        title: 'Imprimir información del empleado'
+                        title: 'Imprimir Registro'
                     },
                     h('i', { class: 'fas fa-sm fa-print' })
                 ) : null,
@@ -203,8 +203,8 @@ const columns = [
 ];
 
 function editarEmpleado(empleado) {
-    console.log('Editar empleado:', empleado);
-    // router.visit(route('empleados.edit', empleado.id));
+    //console.log('Editar empleado:', empleado);
+    router.visit(route('empleados.edit', empleado.id));
 }
 
 function imprimirEmpleado(empleado) {
