@@ -139,32 +139,45 @@ const pageSize = ref(10);
 
 const columns = [
     {
-        accessorKey: 'num_empleado',
-        header: 'Num Empleado',
+        accessorKey: 'fecha',
+        header: 'Fecha Registro',
+        cell: ({ row }) => h('input', {
+            type: 'date',
+            value: row.original.fecha,
+            class: 'border-0 outline-none bg-transparent w-full p-0 text-xs text-slate-500',
+            readonly: true
+        })
     },
     {
-        accessorKey: 'nombre',
-        header: 'Nombre',
-    },
-     {
-        accessorKey: 'primer_apellido',
-        header: 'Primer Apellido',
-    },
-     {
-        accessorKey: 'segundo_apellido',
-        header: 'Segundo Apellido',
+        accessorKey: 'periodo.nombre',
+        header: 'Convocatoria',
+        cell: ({ getValue }) => h('span', {
+            class: 'text-blue-700'
+        }, getValue())
     },
     {
-        accessorKey: 'puesto',
-        header: 'Puesto',
+        accessorKey: 'empleado.num_empleado',
+        header: '# Emp.',
     },
     {
-        accessorKey: 'telefono',
+        id: 'nombre_completo',
+        header: 'Nombre Completo',
+        accessorFn: (row) => `${row.empleado.primer_apellido} ${row.empleado.segundo_apellido} ${row.empleado.nombre}`,
+    },
+    {
+        accessorKey: 'puesto_solicitado',
+        header: 'Puesto al que aspira',
+    },
+    {
+        accessorKey: 'empleado.telefono',
         header: 'Teléfono',
     },
      {
-        accessorKey: 'email',
+        accessorKey: 'empleado.email',
         header: 'Email',
+         cell: ({ getValue }) => h('span', {
+            class: 'text-blue-700 text-xs lowercase'
+        }, getValue())
     },
     {
         id: 'acciones',
