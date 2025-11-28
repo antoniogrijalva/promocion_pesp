@@ -1,11 +1,11 @@
 <template>
     <authenticated-layout>
         <Head :title="l_titulo" />
-        <main class="container mx-auto mt-4">
-            <h1 class="font-bold text-xl mb-4">{{l_titulo}}</h1>
+        <main class="container mx-auto mt-4 p-2">
+            <h1 class="font-bold text-xl mb-1">{{l_titulo}}</h1>
           
             <form @submit.prevent="guardarEmpleado" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-2">
                     <div>
                         <label class="block mb-0 text-xs mt-3 ">Número de Empleado:</label>
                         <input v-model="empleado.num_empleado" type="number" class="w-full text-sm border border-gray-300 px-3 py-1 rounded" required>
@@ -179,10 +179,12 @@
              
 
                
-                
-                <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1 rounded text-sm shadow">
+                <div class="text-end">
+                <button type="submit" class="bg-blue-800 hover:bg-blue-500 text-white px-4 py-1 rounded text-sm shadow mb-4">
                     {{ c_empleados ? 'Actualizar Empleado' : 'Guardar Empleado' }}
                 </button>
+                </div>
+                
             </form>
         </main>
         </authenticated-layout>

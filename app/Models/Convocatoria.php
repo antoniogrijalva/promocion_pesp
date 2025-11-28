@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empleado;
-use App\Models\Perido;
+use App\Models\Periodo;
 use App\Models\User;
 
 class Convocatoria extends Model
@@ -25,7 +25,7 @@ class Convocatoria extends Model
     }
     public function periodo()
     {
-        return $this->belongsTo(Perido::class);
+        return $this->belongsTo(Periodo::class);
     }
 
     public function user()

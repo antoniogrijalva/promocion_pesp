@@ -32,8 +32,8 @@ require __DIR__.'/auth.php';
 
 
 Route::middleware('auth')->group(function () {
+    
     Route::get('/empleados', [EmpleadoController::class, 'index'])->name('empleados.index');
-
     Route::get('/empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create');
     Route::post('/empleados', [EmpleadoController::class, 'store'])->name('empleados.store');
     Route::get('/empleados/{empleado}/edit', [EmpleadoController::class, 'edit'])->name('empleados.edit');
@@ -49,6 +49,12 @@ Route::middleware('auth')->group(function () {
     //Route::delete('/periodos/{periodo}', [PeriodoController::class, 'destroy'])->name('periodos.destroy');
 
     
+    Route::get('/convocatorias', [ConvocatoriaController::class, 'index'])->name('convocatorias.index');
+    Route::get('/convocatorias/create', [ConvocatoriaController::class, 'create'])->name('convocatorias.create');
+    Route::post('/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatorias.store');
+    Route::get('/convocatorias/{convocatoria}/edit', [ConvocatoriaController::class, 'edit'])->name('convocatorias.edit');
+    Route::put('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'update'])->name('convocatorias.update');
+    //Route::delete('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'destroy'])->name('convocatorias.destroy');
    
    
 });

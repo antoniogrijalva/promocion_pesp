@@ -1,11 +1,11 @@
  <template>
     <authenticated-layout>
-{{ c_periodo }}
+
         <main class="container mx-auto mt-4">
-            <div class="flex justify-between items-center mb-2">
-                <h1 class="font-bold text-2xl">Periodos</h1>
-                <button @click="regresar_index" class="bg-slate-500 hover:bg-slate-700 text-white px-2 py-2 text-sm rounded">
-                    <-  Regresar 
+            <div class="flex justify-between items-center mb-0">
+                
+                <button @click="regresar_index" class="bg-slate-500 hover:bg-slate-700 text-white px-2 py-1 text-sm rounded">
+                     ← Regresar 
                 </button>
             </div>
 
@@ -13,11 +13,11 @@
             <form 
                 @submit.prevent="guardarPeriodo" 
                 method="post" 
-                class="max-w-lg bg-white p-6 rounded shadow"
+                class="max-w-lg bg-white p-4 rounded shadow mx-auto"
             >
-                <input type="hidden" name="_method" :value="props.c_periodo.id ? 'PUT' : 'POST'" />
-                <div class="mb-4">          
-                    <label for="nombre" class="block text-gray-700 font-bold mb-2">Nombre del Periodo:</label>
+                <!-- <input type="hidden" name="_method" :value="props.c_periodo.id ? 'PUT' : 'POST'" /> -->
+                <div class="mb-2">          
+                    <label for="nombre" class="block text-gray-700 font-bold mb-0">Nombre del Periodo:</label>
                     <input 
                         v-model="formulario.nombre" 
                         type="text" 
@@ -27,8 +27,8 @@
                         required
                     />  
                 </div>
-                <div class="mb-4">          
-                    <label for="fecha_inicio" class="block text-gray-700 font-bold mb-2">Fecha de Inicio:</label>
+                <div class="mb-2">          
+                    <label for="fecha_inicio" class="block text-gray-700 font-bold mb-0">Fecha de Inicio:</label>
                     <input 
                         v-model="formulario.fecha_inicio" 
                         type="date" 
@@ -38,8 +38,8 @@
                         required
                     />  
                 </div>
-                <div class="mb-4">          
-                    <label for="fecha_fin" class="block text-gray-700 font-bold mb- 2">Fecha de Fin:</label>
+                <div class="mb-2">          
+                    <label for="fecha_fin" class="block text-gray-700 font-bold mb-0">Fecha de Fin:</label>
                     <input 
                         v-model="formulario.fecha_fin" 
                         type="date" 
@@ -49,17 +49,17 @@
                         required
                     />  
                 </div>
-                <div class="mb-4">          
-                    <label for="descripcion" class="block text-gray-700 font-bold mb-2">Descripción:</label>
+                <div class="mb-2">          
+                    <label for="descripcion" class="block text-gray-700 font-bold mb-0">Descripción:</label>
                     <textarea 
                         v-model="formulario.descripcion" 
                         id="descripcion" 
                         name="descripcion" 
                         class="border border-gray-300 rounded px-4 py-2 w-full"
-                        rows="4"
+                        rows="3"
                     ></textarea>  
                 </div>      
-                <div class="mb-4 flex items-center">
+                <div class="mb-2 flex items-center">
                     <input 
                         v-model="formulario.activo" 
                         type="checkbox" 
@@ -68,14 +68,18 @@
                         class="mr-2"
                     />
                     <label for="activo" class="text-gray-700 font-bold">Activo</label>
+                    <div v-if="$page.props.errors.activo" class="mt-2 text-red-500 m-2 p-1 rounded bg-orange-50 text-center text-xs shadow-md">
+                        {{ $page.props.errors.activo }}
+                    </div>
                 </div>
-                <div>
+                <div class="text-end">
                     <button 
                         type="submit" 
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                        class="bg-blue-800 hover:bg-blue-600 text-white px-4 py-1 rounded"
                     >
-                        {{ props.c_periodo.id ? 'Actualizar Periodo' : 'Crear Periodo' }}
+                        {{ c_periodo ? 'Actualizar Periodo' : 'Crear Periodo' }}
                     </button>
+
                 </div>
             </form>
 
@@ -95,11 +99,14 @@ const props = defineProps({
         type: Object,
         default: null,
     },
-});
+
+}); 
+
 const formulario = ref({
     nombre: props.c_periodo?.nombre || '',
-        fecha_inicio: props.c_periodo?.fecha_inicio?.split(' ')[0] || '',
-        fecha_fin: props.c_periodo?.fecha_fin?.split(' ')[0] || '',
+    fecha_inicio: props.c_periodo?.fecha_inicio?.split('T')[0] || '',
+        
+    fecha_fin: props.c_periodo?.fecha_fin?.split('T')[0] || '',
     descripcion: props.c_periodo?.descripcion || '',
     activo: props.c_periodo?.activo || false,
 });
@@ -110,7 +117,7 @@ const regresar_index = () => {
 };
 
 const guardarPeriodo = () => {
-    if (props.c_periodo.id) {
+    if (props.c_periodo) {
         // Actualizar periodo existente
         router.put(route('periodos.update', props.c_periodo.id), formulario.value);
     } else {

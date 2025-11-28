@@ -12,7 +12,9 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        $periodos = Periodo::all();
+        $periodos = Periodo::orderByDesc('fecha_inicio')->get();
+
+       
         return inertia('Promociones/catalogos/Periodos', ['periodos' => $periodos]);
     }
 
@@ -48,7 +50,9 @@ class PeriodoController extends Controller
      */
     public function edit(Periodo $periodo)
     {
-        $c_periodo = $periodo;
+        //$c_periodo = $periodo;
+        $c_periodo=Periodo::findOrFail($periodo->id);
+       //dd($c_periodo);
         return inertia('Promociones/catalogos/Periodos_captura', ['c_periodo' => $c_periodo]);
     }
 
@@ -57,7 +61,15 @@ class PeriodoController extends Controller
      */
     public function update(Request $request, Periodo $periodo)
     {
-        //
+        //preguntar si hay un registro en el modelo Periodo donde activo sea true y el id sea diferente al del periodo que se esta editando
+        $existeActivo = Periodo::where('activo', true)
+            ->where('id', '!=', $periodo->id)
+            ->exists();
+        if ($request->activo && $existeActivo) {
+            return redirect()->back()->withErrors(['activo' => 'Ya existe un periodo activo. Solo puede haber un periodo activo a la vez.']);
+        }
+        $periodo->update($request->all());
+        return redirect()->route('periodos.index');
     }
 
     /**

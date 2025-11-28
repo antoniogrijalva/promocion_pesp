@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Convocatoria;
+use App\Models\Periodo;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 
 class ConvocatoriaController extends Controller
@@ -12,7 +14,14 @@ class ConvocatoriaController extends Controller
      */
     public function index()
     {
-        //
+
+        $periodoActivoId = $this->getPeriodoActivoId();
+        $convocatorias = Convocatoria::all()->where('periodo_id', $periodoActivoId);
+        
+
+        return inertia('Promociones/Convocatorias', [
+            'empleados' => $convocatorias,
+        ]);
     }
 
     /**
@@ -20,7 +29,10 @@ class ConvocatoriaController extends Controller
      */
     public function create()
     {
-        //
+        $c_empleados = Empleado::all();
+        return inertia('Promociones/Convocatorias_captura', [
+            'c_empleados' => $c_empleados,
+        ]);
     }
 
     /**
@@ -61,5 +73,11 @@ class ConvocatoriaController extends Controller
     public function destroy(Convocatoria $convocatoria)
     {
         //
+    }
+
+    private function getPeriodoActivoId()
+    {
+        $periodoActivo = Periodo::where('activo', true)->first();
+        return $periodoActivo ? $periodoActivo->id : null;
     }
 }

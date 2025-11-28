@@ -22,4 +22,5 @@ class Periodo extends Model
         'fecha_fin' => 'date',
         'activo' => 'boolean',
     ];
+
 }
