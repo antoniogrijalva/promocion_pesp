@@ -54,9 +54,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatorias.store');
     Route::get('/convocatorias/{convocatoria}/edit', [ConvocatoriaController::class, 'edit'])->name('convocatorias.edit');
     Route::put('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'update'])->name('convocatorias.update');
-    //Route::delete('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'destroy'])->name('convocatorias.destroy');
+    //Route::get('/convocatorias/{convocatoria}/show', [ConvocatoriaController::class, 'show'])->name('convocatorias.show');
+    Route::delete('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'destroy'])->name('convocatorias.destroy');
    
-   
+   Route::get('/convocatorias/pdf/{id}', [ConvocatoriaController::class, 'generarPDF'])->name('convocatorias.pdf');
 });
 
 

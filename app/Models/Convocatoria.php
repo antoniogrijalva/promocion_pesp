@@ -16,7 +16,42 @@ class Convocatoria extends Model
         'puesto_actual',
         'puesto_solicitado',
         'observaciones',
-        'periodo_id'
+        'periodo_id',
+
+        'acreditacion_cuip_fecha',
+        'acreditacion_cuip_vigencia',
+               
+        'acreditacion_competencias',
+        'acreditacion_competencias_fecha',
+        'acreditacion_competencias_vigencia',
+        'acreditacion_competencias_calificacion',
+           
+        'acreditacion_c3',
+        'acreditacion_c3_fecha',
+        'acreditacion_c3_vigencia',
+           
+        'acreditacion_desempeno',
+        'acreditacion_desempeno_fecha',
+        'acreditacion_desempeno_vigencia',
+        'acreditacion_desempeno_calificacion',
+    ];
+    protected $casts = [
+        'acreditacion_cuip_fecha' => 'date',
+        'acreditacion_cuip_vigencia' => 'date',
+               
+        'acreditacion_competencias' => 'boolean',
+        'acreditacion_competencias_fecha' => 'date',
+        'acreditacion_competencias_vigencia' => 'date',
+        'acreditacion_competencias_calificacion' => 'decimal:2',
+       
+        'acreditacion_c3' => 'boolean',
+        'acreditacion_c3_fecha' => 'date',
+        'acreditacion_c3_vigencia' => 'date',
+       
+        'acreditacion_desempeno' => 'boolean',
+        'acreditacion_desempeno_fecha' => 'date',
+        'acreditacion_desempeno_vigencia' => 'date',
+        'acreditacion_desempeno_calificacion' => 'decimal:2',
     ];
 
     public function empleado()

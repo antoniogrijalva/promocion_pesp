@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Convocatoria;
 use App\Models\Periodo;
 use App\Models\Empleado;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ConvocatoriaController extends Controller
@@ -51,10 +52,13 @@ class ConvocatoriaController extends Controller
             'empleado_id' => 'required',
             'puesto_actual' => 'nullable|string',
             'periodo_id' => 'required|integer',
+            'fecha' => 'nullable|date',
+            
         ], [
             'empleado_id.required' => 'El empleado es obligatorio.',
             'puesto_actual.string' => 'El puesto actual debe ser texto.',          
             'periodo_id.required' => 'No has establecido un periodo activo para las convocatorias.',
+            'fecha.date' => 'La fecha debe ser una fecha válida.',
         ]);
 
         //validar que este empleado no tenga ya una convocatoria en el periodo activo
@@ -69,12 +73,34 @@ class ConvocatoriaController extends Controller
         //crear el registro
         $convocatoria = new Convocatoria();
         $convocatoria->user_id = auth()->user()->id;
-        $convocatoria->fecha = now();
+        $convocatoria->fecha = $validated['fecha'];
         $convocatoria->empleado_id = $validated['empleado_id'];
         $convocatoria->puesto_actual = $validated['puesto_actual'];
         $convocatoria->puesto_solicitado = $request->input('puesto_solicitado');
         $convocatoria->observaciones = $request->input('observaciones');
         $convocatoria->periodo_id = $validated['periodo_id'];
+
+        $convocatoria->acreditacion_formacion = $request->input('acreditacion_formacion') === 'APROBADO' ? true : false;
+        $convocatoria->acreditacion_formacion_fecha = $request->input('acreditacion_formacion_fecha');
+
+        $convocatoria->acreditacion_cuip = $request->input('acreditacion_cuip');
+        $convocatoria->acreditacion_cuip_fecha = $request->input('acreditacion_cuip_fecha');       
+        $convocatoria->acreditacion_cuip_vigencia = $request->input('acreditacion_cuip_vigencia');
+
+        $convocatoria->acreditacion_competencias = $request->input('acreditacion_competencias') === 'APROBADO' ? true : false;
+        $convocatoria->acreditacion_competencias_fecha = $request->input('acreditacion_competencias_fecha');
+        $convocatoria->acreditacion_competencias_vigencia = $request->input('acreditacion_competencias_vigencia');
+        $convocatoria->acreditacion_competencias_calificacion = $request->input('acreditacion_competencias_calificacion');
+
+        $convocatoria->acreditacion_c3 = $request->input('acreditacion_c3') === 'APROBADO' ? true : false;
+        $convocatoria->acreditacion_c3_fecha = $request->input('acreditacion_c3_fecha');
+        $convocatoria->acreditacion_c3_vigencia = $request->input('acreditacion_c3_vigencia');
+
+        $convocatoria->acreditacion_desempeno = $request->input('acreditacion_desempeno') === 'APROBADO' ? true : false;
+        $convocatoria->acreditacion_desempeno_fecha = $request->input('acreditacion_desempeno_fecha');
+        $convocatoria->acreditacion_desempeno_vigencia = $request->input('acreditacion_desempeno_vigencia');
+        $convocatoria->acreditacion_desempeno_calificacion = $request->input('acreditacion_desempeno_calificacion');
+
         $convocatoria->save();
         return redirect()->route('convocatorias.index')->with('success', 'Convocatoria creada exitosamente.');
     }
@@ -84,12 +110,7 @@ class ConvocatoriaController extends Controller
      */
     public function show(Convocatoria $convocatoria)
     {
-        //
-        $convocatorias = Convocatoria::all()->where('id', $convocatoria->id)->first();
-        
-         return inertia('Promociones/Convocatorias_captura', [
-            'c_convocatorias' => $convocatorias,
-        ]);
+       
     }
 
     /**
@@ -97,7 +118,12 @@ class ConvocatoriaController extends Controller
      */
     public function edit(Convocatoria $convocatoria)
     {
-        //
+        
+        $convocatorias = Convocatoria::with('user')->with('empleado')->where('id', $convocatoria->id)->first();
+        
+         return inertia('Promociones/Convocatorias_captura', [
+            'c_convocatorias' => $convocatorias,
+        ]);
     }
 
     /**
@@ -105,7 +131,19 @@ class ConvocatoriaController extends Controller
      */
     public function update(Request $request, Convocatoria $convocatoria)
     {
-        //
+         $validated = $request->validate([
+          
+            'fecha' => 'nullable|date',
+            
+        ], [
+           
+            'fecha.date' => 'La fecha debe ser una fecha válida.',
+        ]);
+
+        $convocatoria->fecha = $validated['fecha'];
+        $convocatoria->observaciones = $request->input('observaciones');
+        $convocatoria->save();
+        return redirect()->route('convocatorias.index')->with('success', 'Convocatoria actualizada exitosamente.');
     }
 
     /**
@@ -113,12 +151,31 @@ class ConvocatoriaController extends Controller
      */
     public function destroy(Convocatoria $convocatoria)
     {
-        //
+        //elimina la convocatoria
+        $convocatoria->delete();
+
+        
+        
     }
 
     private function getPeriodoActivoId()
     {
         $periodoActivo = Periodo::where('activo', true)->first();
         return $periodoActivo ? $periodoActivo->id : null;
+    }
+
+    /**
+     * Genera un PDF de ejemplo con domPDF.
+     */
+    public function generarPDF($id_convocatoria)
+    {
+
+        $convocatorias = Convocatoria::with('user')->with('empleado')->where('id', $id_convocatoria)->first();
+        $data = [
+            'titulo' => 'Reporte de Convocatorias',
+            'convocatorias' => $convocatorias,
+        ];
+        $pdf = Pdf::loadView('pdf.convocatorias', $data);
+        return $pdf->download('convocatorias.pdf');
     }
 }

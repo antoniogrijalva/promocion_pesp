@@ -3,7 +3,7 @@
         <Head :title="l_titulo" />
         <main class="container mx-auto mt-4 p-2">
             <h1 class="font-bold text-xl mb-1">{{l_titulo}}</h1>
-          
+         
             <form @submit.prevent="guardarRegistro"  @keydown.enter.prevent="handleEnterKey" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 m-2">
 
@@ -16,13 +16,19 @@
                             @keydown.enter.prevent="buscarEmpleado"
                             @keydown.tab="buscarEmpleado"
                             :readonly="!!props.c_convocatorias"
-                            :class="props.c_convocatorias ? 'bg-gray-100' : ''"
+                            :class="props.c_convocatorias ? 'bg-slate-200' : ''"
                             class="mt-1 p-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500" 
                             placeholder="Ingrese número de empleado"
                         />
                         
+                        
                     </div>
-                    <div class="col-span-3">
+                    <div>
+                         <label for="fecha" class="block font-medium text-sm text-gray-700">Fecha de Captura:</label>
+                        <input type="date" v-model="convocatoria.fecha" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-yellow-50">
+                    </div>
+
+                    <div class="col-span-2">
                         <label for="nombre" class="block font-medium text-sm text-gray-700">Nombre:</label>
                         <input type="text" id="nombre" v-model="convocatoria.nombre" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
                     </div>
@@ -89,7 +95,7 @@
                         <input type="date" id="acreditacion_c3_fecha" v-model="convocatoria.acreditacion_c3_fecha" :class="convocatoria.acreditacion_c3_fecha ? '' : 'text-gray-300'" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
                         <label for="acreditacion_c3_vigencia" class="block font-medium text-sm text-gray-700 mt-2">Vigencia:</label>
                         <input type="date" id="acreditacion_c3_vigencia" v-model="convocatoria.acreditacion_c3_vigencia" :class="convocatoria.acreditacion_c3_vigencia ? '' : 'text-gray-300'" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
-                        <label for="acreditacion_c3_observaciones" class="block font-medium text-xs lowercase text-center bg-white rounded shadow p-1 text-sky-700 mt-2">{{ convocatoria.acreditacion_c3_observaciones }}</label>
+                        <label for="acreditacion_c3_observaciones" class="block font-medium text-xs lowercase text-center bg-white rounded shadow p-1 text-sky-700 mt-2" v-if="convocatoria.acreditacion_c3_observaciones">{{ convocatoria.acreditacion_c3_observaciones }}</label>
                     </div>
                 </div>
                 
@@ -130,8 +136,8 @@
                        </div>
                     </div>
 
-                <div class="flex justify-end" v-if="!c_convocatorias">
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Guardar</button>
+                <div class="flex justify-end">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">{{c_convocatorias ? 'Actualizar' : 'Guardar'}}</button>
                 </div>
 
             </form>
@@ -172,7 +178,7 @@
         
         user_captura: props.c_convocatorias ? props.c_convocatorias.user.name : '',
         
-        fecha: props.c_convocatorias ? props.c_convocatorias.fecha : new Date().toISOString().split('T')[0],
+        fecha: props.c_convocatorias ? props.c_convocatorias.fecha.split('T')[0] : new Date().toISOString().split('T')[0],
         
         puesto_actual: props.c_convocatorias ? props.c_convocatorias.puesto_actual : '',
         puesto_solicitado: props.c_convocatorias ? props.c_convocatorias.puesto_solicitado : '',
@@ -181,31 +187,34 @@
         periodo_id: props.c_convocatorias ? props.c_convocatorias.periodo_id : props.l_periodoActivo,
 
         empleado_id: props.c_convocatorias ? props.c_convocatorias.empleado_id : null,
-        numero_empleado: props.c_convocatorias ? props.c_convocatorias.numero_empleado : '',
-        nombre: props.c_convocatorias ? props.c_convocatorias.nombre : '',  
+        numero_empleado: props.c_convocatorias ? props.c_convocatorias.empleado.num_empleado : '',
+        nombre: props.c_convocatorias ?  props.c_convocatorias.empleado.primer_apellido + ' ' +  props.c_convocatorias.empleado.segundo_apellido+ ' ' + props.c_convocatorias.empleado.segundo_apellido : '',  
   
-        email: props.c_convocatorias ? props.c_convocatorias.email : '',
-        telefono: props.c_convocatorias ? props.c_convocatorias.telefono : '',
-        curp: props.c_convocatorias ? props.c_convocatorias.curp : '',
+        email: props.c_convocatorias ? props.c_convocatorias.empleado.email : '',
+        telefono: props.c_convocatorias ? props.c_convocatorias.empleado.telefono : '',
+        curp: props.c_convocatorias ? props.c_convocatorias.empleado.curp : '',
 
 
 
-        fecha_ingreso: props.c_convocatorias ? props.c_convocatorias.fecha_ingreso : '',
+        fecha_ingreso: props.c_convocatorias ? props.c_convocatorias.empleado.fecha_ingreso.split('T')[0] : '',
+        acreditacion_formacion: props.c_convocatorias ? (props.c_convocatorias.acreditacion_formacion ? 'APROBADO' : '--') : '',
+        acreditacion_formacion_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_formacion_fecha.split('T')[0] : '',
+
         acreditacion_cuip: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip : '',
-        acreditacion_cuip_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip_fecha : '',
-        acreditacion_cuip_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip_vigencia : '',
+        acreditacion_cuip_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip_fecha.split('T')[0] : '',
+        acreditacion_cuip_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip_vigencia.split('T')[0] : '',
        
         acreditacion_competencias: props.c_convocatorias ? (props.c_convocatorias.acreditacion_competencias ? 'APROBADO' : '--') : '',
-        acreditacion_competencias_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_competencias_fecha : '',
-        acreditacion_competencias_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_competencias_vigencia : '',
+        acreditacion_competencias_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_competencias_fecha.split('T')[0] : '',
+        acreditacion_competencias_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_competencias_vigencia.split('T')[0] : '',
 
         acreditacion_desempeno: props.c_convocatorias ? (props.c_convocatorias.acreditacion_desempeno ? 'APROBADO' : '--') : '',
-        acreditacion_desempeno_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_desempeno_fecha : '',
-        acreditacion_desempeno_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_desempeno_vigencia : '',
+        acreditacion_desempeno_fecha: props.c_convocatorias ? (props.c_convocatorias.acreditacion_desempeno_fecha ? props.c_convocatorias.acreditacion_desempeno_fecha.split('T')[0] : '') : '',
+        acreditacion_desempeno_vigencia: props.c_convocatorias ? (props.c_convocatorias.acreditacion_desempeno_vigencia ? props.c_convocatorias.acreditacion_desempeno_vigencia.split('T')[0] : '')  : '',
 
         acreditacion_c3: props.c_convocatorias ? (props.c_convocatorias.acreditacion_c3 ? 'APROBADO' : '--') : '',
-        acreditacion_c3_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_c3_fecha : '',
-        acreditacion_c3_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_c3_vigencia : '',
+        acreditacion_c3_fecha: props.c_convocatorias ? (props.c_convocatorias.acreditacion_c3_fecha ? props.c_convocatorias.acreditacion_c3_fecha.split('T')[0] : '') : '',
+        acreditacion_c3_vigencia: props.c_convocatorias ? (props.c_convocatorias.acreditacion_c3_vigencia ? props.c_convocatorias.acreditacion_c3_vigencia.split('T')[0] : '') : '',
         acreditacion_c3_observaciones: props.c_convocatorias ? props.c_convocatorias.acreditacion_c3_observaciones : '',
 
 
@@ -227,6 +236,9 @@
             convocatoria.value.puesto_solicitado = ObtenerPuestoSolicitado(empleado.puesto);
 
             convocatoria.value.fecha_ingreso = empleado.fecha_ingreso.split('T')[0];
+
+            convocatoria.value.acreditacion_formacion = empleado.acreditacion_formacion ? 'APROBADO' : '--';
+            convocatoria.value.acreditacion_formacion_fecha = empleado.acreditacion_formacion_fecha ? empleado.acreditacion_formacion_fecha.split('T')[0] : '';
 
             convocatoria.value.acreditacion_cuip = empleado.acreditacion_cuip;
             convocatoria.value.acreditacion_cuip_fecha = empleado.acreditacion_cuip_fecha.split('T')[0];
@@ -256,6 +268,8 @@
             convocatoria.value.puesto_solicitado = '';
 
             convocatoria.value.fecha_ingreso = '';
+            convocatoria.value.acreditacion_formacion = '';
+            convocatoria.value.acreditacion_formacion_fecha = '';
             convocatoria.value.acreditacion_cuip = '';
             convocatoria.value.acreditacion_cuip_fecha = '';
             convocatoria.value.acreditacion_cuip_vigencia = '';
@@ -291,13 +305,13 @@
     };
 
     const guardarRegistro = () => {
-        // if (props.c_convocatorias) {
-        //     // Actualizar registro existente
-        //     router.put(`/convocatorias/${convocatoria.value.id}`, convocatoria.value);
-        // } else {
+        if (props.c_convocatorias) {
+            // Actualizar registro existente
+            router.put(route('convocatorias.update', convocatoria.value.id), convocatoria.value);
+         } else {
             // Crear nuevo registro
             router.post(route('convocatorias.store'), convocatoria.value);
-        // }
+        }
     };
 
      const handleEnterKey = (event) => {

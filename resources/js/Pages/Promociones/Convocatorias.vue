@@ -173,8 +173,8 @@ const columns = [
         header: 'Teléfono',
     },
      {
-        accessorKey: 'empleado.email',
-        header: 'Email',
+        accessorKey: 'user.name',
+        header: 'Capturista',
          cell: ({ getValue }) => h('span', {
             class: 'text-blue-700 text-xs lowercase'
         }, getValue())
@@ -186,44 +186,46 @@ const columns = [
             'div',
             { class: 'flex gap-2' },
             [
-                /*h('button',
-                    {
-                        class: 'bg-sky-700 text-white px-2 _py-1 rounded hover:bg-sky-600',
-                        onClick: () => verDetalles(row.original),
-                        title: 'Ver detalles del empleado'
-                    },
-                    h('i', { class: 'fas fa-sm fa-eye' })
-                ),*/
+                
                 h('button',
                     {
                         class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
-                        onClick: () => editarEmpleado(row.original),
+                        onClick: () => editarConvocatoria(row.original),
                         title: 'Editar empleado'
                     },
                     h('i', { class: 'fas fa-sm fa-edit' })
                 ),
-                row.original.telefono ? h('button',
+                 h('button',
                     {
                         class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
-                        onClick: () => imprimirEmpleado(row.original),
+                        onClick: () => imprimirConvocatoria(row.original),
                         title: 'Imprimir Registro'
                     },
                     h('i', { class: 'fas fa-sm fa-print' })
-                ) : null,
+                ) ,
+                h('button',
+                    {
+                        class: 'bg-red-800 text-white px-2 _py-1 rounded hover:bg-red-600',
+                        onClick: () => eliminaConvocatoria(row.original),
+                        title: 'Eliminar'
+                    },
+                    h('i', { class: 'fas fa-sm fa-trash' })
+                ),
             ]
         ),
     },
 ];
 
-function editarEmpleado(empleado) {
-    //console.log('Editar empleado:', empleado);
-    router.visit(route('empleados.edit', empleado.id));
+function editarConvocatoria(convocatoria) {
+    //console.log('Editar convocatoria:', convocatoria);
+    router.visit(route('convocatorias.edit', convocatoria.id));
 }
 
-function imprimirEmpleado(empleado) {
-    console.log('Imprimir empleado:', empleado);
-    // Lógica para imprimir
+function imprimirConvocatoria(convocatoria) {
+    //console.log('Imprimir convocatoria:', convocatoria);
+    window.open(route('convocatorias.pdf', convocatoria.id), '_blank');
 }
+
 
 const table = useVueTable({
     data: props.empleados,
@@ -251,8 +253,13 @@ function agregarRegistro() {
     router.visit(route('convocatorias.create'));
 }
 
-function verDetalles(empleado) {
-    console.log('Ver detalles de:', empleado);
-    // router.visit(route('empleados.show', empleado.id));
+function eliminaConvocatoria(convocatoria) {
+    //console.log('Eliminar convocatoria:', convocatoria);
+    // Lógica para eliminar
+
+    if (confirm('¿Está seguro de que desea eliminar este registro?')) {
+        router.delete(route('convocatorias.destroy', convocatoria.id));
+        router.get(route('convocatorias.index') );
+    }
 }
 </script>

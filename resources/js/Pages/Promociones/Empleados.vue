@@ -189,14 +189,14 @@ const columns = [
                     },
                     h('i', { class: 'fas fa-sm fa-edit' })
                 ),
-                row.original.telefono ? h('button',
-                    {
-                        class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
-                        onClick: () => imprimirEmpleado(row.original),
-                        title: 'Imprimir Registro'
-                    },
-                    h('i', { class: 'fas fa-sm fa-print' })
-                ) : null,
+                // row.original.telefono ? h('button',
+                //     {
+                //         class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
+                //         onClick: () => imprimirEmpleado(row.original),
+                //         title: 'Imprimir Registro'
+                //     },
+                //     h('i', { class: 'fas fa-sm fa-print' })
+                // ) : null,
             ]
         ),
     },
