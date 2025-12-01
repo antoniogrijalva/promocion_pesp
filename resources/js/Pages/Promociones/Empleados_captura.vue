@@ -75,7 +75,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-2">
 
                      <div class="border border-gray-200 rounded p-2">
-                        <h1 class="text-center bg-slate-600 rounded p-1 text-white text-xs">FORMACIÓN ACADEMICA</h1>
+                        <h1 class="text-center bg-gradient-to-r from-slate-600 via-slate-900 to-slate-600 rounded p-1 text-white text-xs">FORMACIÓN ACADEMICA</h1>
                         <div class="flex items-center space-x-2 mt-7">
                             <input v-model="empleado.acreditacion_formacion" type="checkbox" class="rounded">
                             <label class="text-xs">Acreditada</label>
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="border border-gray-200 rounded p-2">
-                        <h1 class="text-center bg-slate-600 rounded p-1 text-white text-xs">CERTIFICADO ÚNICO POLICIAL</h1>
+                        <h1 class="text-center bg-gradient-to-r from-slate-600 via-slate-900 to-slate-600 rounded p-1 text-white text-xs">CERTIFICADO ÚNICO POLICIAL</h1>
                         <div>
                             <label class="block mb-0 text-xs mt-3 ">Num. CUP:</label>
                             <input v-model="empleado.acreditacion_cuip" type="text" class="w-full text-sm border border-gray-300 px-3 py-1 rounded">
@@ -108,7 +108,7 @@
 
 
                     <div class="border border-gray-200 rounded p-2">
-                        <h1 class="text-center bg-slate-600 rounded p-1 text-white text-xs">COMPETENCIAS BÁSICAS</h1>
+                        <h1 class="text-center bg-gradient-to-r from-slate-600 via-slate-900 to-slate-600 rounded p-1 text-white text-xs">COMPETENCIAS BÁSICAS</h1>
                         <div class="flex items-center space-x-2 mt-7">
                             <input v-model="empleado.acreditacion_competencias" type="checkbox" class="rounded">
                             <label class="text-xs">Acreditada/Vigentes</label>
@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="border border-gray-200 rounded p-2">
-                        <h1 class="text-center bg-slate-600 rounded p-1 text-white text-xs">EVALUACION DESEMPEÑO</h1>
+                        <h1 class="text-center bg-gradient-to-r from-slate-600 via-slate-900 to-slate-600 rounded p-1 text-white text-xs">EVALUACION DESEMPEÑO</h1>
                         <div class="flex items-center space-x-2 mt-7">
                             <input v-model="empleado.acreditacion_desempeno" type="checkbox" class="rounded">
                             <label class="text-xs">Acreditada/Vigentes</label>
@@ -150,7 +150,7 @@
                     </div>
 
                      <div class="border border-gray-200 rounded p-2">
-                        <h1 class="text-center bg-slate-600 rounded p-1 text-white text-xs">EVALUACION C3</h1>
+                        <h1 class="text-center bg-gradient-to-r from-slate-600 via-slate-900 to-slate-600 rounded p-1 text-white text-xs">EVALUACION C3</h1>
                         <div class="flex items-center space-x-2 mt-7">
                             <input v-model="empleado.acreditacion_c3" type="checkbox" class="rounded">
                             <label class="text-xs">Acreditada/Vigente</label>

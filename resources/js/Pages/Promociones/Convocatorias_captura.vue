@@ -113,25 +113,25 @@
                  
                     <div>
                         <label for="puesto_solicitado" class="block font-medium text-sm text-gray-700">Puesto al que <b>aspira</b>:</label>
-                        <input type="text" id="puesto_solicitado" v-model="convocatoria.puesto_solicitado" class="mt-1 block w-full p-1 border-sky-500 rounded-md shadow-sm bg-sky-700 text-white" readonly />
+                        <input type="text" id="puesto_solicitado" v-model="convocatoria.puesto_solicitado" class="mt-1 block w-full p-1 border-sky-500 rounded-md text-center shadow-sm bg-gradient-to-r from-slate-900 via-sky-600 to-slate-900  text-white" readonly />
                     </div>
 
                 </div>
 
             
                 <div class="md:col-span-2 lg:col-span-3">
-                    <label for="observaciones" class="block font-medium text-sm text-gray-700">Observaciones:</label>
-                    <textarea id="observaciones" v-model="convocatoria.observaciones" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Ingrese observaciones adicionales"></textarea> 
+                    <label for="observaciones" class="block font-extrabold text-sm text-gray-700">Observaciones:</label>
+                    <textarea id="observaciones" v-model="convocatoria.observaciones" rows="4" class="mt-1 block w-full border-gray-300 bg-yellow-50 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Ingrese observaciones adicionales"></textarea> 
                 </div>
 
                     
                     <div v-if="Object.keys($page.props.errors).length">
                       
-                       <div class="bg-orange-100 border border-red-200  px-4 py-3 rounded relative" role="alert">
-                           <strong class="font-bold text-2xl text-slate-700">Por favor corrige los siguientes errores:</strong>
+                       <div class="bg-gradient-to-r from-black via-red-800 to-red-700    px-4 py-3 rounded-xl relative" role="alert">
+                           <strong class="font-bold text-2xl text-slate-300">Por favor corrige los siguientes errores:</strong>
                           
                            <ul class="mt-2 list-disc list-inside">
-                               <li class="text-red-700" v-for="(errorMessages, field) in $page.props.errors" :key="field" >{{ errorMessages }}</li>
+                               <li class="text-yellow-200" v-for="(errorMessages, field) in $page.props.errors" :key="field" >{{ errorMessages }}</li>
                            </ul>
                        </div>
                     </div>
