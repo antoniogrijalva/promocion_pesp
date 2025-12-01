@@ -8,29 +8,47 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        h1 {
-            color: #1e7a20ff;
+        
+        .jaga_titulo {
+            text-align: center;
+            margin-bottom: 20px;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .jaga_tabla {
+            width: 100%;
+            border-collapse: collapse;
         }
-        li {
-            padding: 5px 0;
-            border-bottom: 1px solid #11cd24ff;
+        .jaga_tabla_titulo {
+            background-color: #f2f2f2;
+            font-weight: bold;
         }
+        .jaga_tabla_detalle {
+         
+            padding: 8px;
+        }
+
+        .jaga_tabla_detalle_border {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+
     </style>
 </head>
 <body>
     <h1>{{ $titulo }}</h1>
 
-    <p class="text-sm text-gray-500">
-        Convocatoria creada por:  {{ $convocatorias->user->name }}
-    </p>
-
-    <div>
-    Yo {{ $convocatorias->empleado->primer_apellido }} {{ $convocatorias->empleado->segundo_apellido }} {{ $convocatorias->empleado->nombre}}  me permito postularme para el cargo de {{ $convocatorias->cargo }}  en la dependencia de {{ $convocatorias->dependencia }} , de acuerdo a la convocatoria N° {{ $convocatorias->numero_convocatoria }}  emitida el día {{ $convocatorias->fecha_emision }} con fecha de cierre el día {{ $convocatorias->fecha_cierre }}.
-    </div>
+    <table>
+        <th>
+            <td>
+                <strong>Empleado:</strong> {{ $convocatorias->empleado->primer_apellido }} {{ $convocatorias->empleado->segundo_apellido }} {{ $convocatorias->empleado->nombre }} <br>
+                <strong>Cargo:</strong> {{ $convocatorias->empleado->cargo }} <br>
+                <strong>Fecha de Convocatoria:</strong> {{ $convocatorias->fecha_convocatoria }} <br>
+                <strong>Motivo:</strong> {{ $convocatorias->motivo }} <br>
+                <strong>Detalles:</strong> {{ $convocatorias->detalles }} <br>
+                <strong>Creado por:</strong> {{ $convocatorias->user->name }} <br>
+            </td>
+        </th>
+    </table>
 
         
         

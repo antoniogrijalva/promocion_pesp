@@ -198,15 +198,15 @@
 
         fecha_ingreso: props.c_convocatorias ? props.c_convocatorias.empleado.fecha_ingreso.split('T')[0] : '',
         acreditacion_formacion: props.c_convocatorias ? (props.c_convocatorias.acreditacion_formacion ? 'APROBADO' : '--') : '',
-        acreditacion_formacion_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_formacion_fecha.split('T')[0] : '',
+        acreditacion_formacion_fecha: props.c_convocatorias ? (props.c_convocatorias.acreditacion_formacion_fecha ? props.c_convocatorias.acreditacion_formacion_fecha.split('T')[0] : '') : '',
 
         acreditacion_cuip: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip : '',
-        acreditacion_cuip_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip_fecha.split('T')[0] : '',
-        acreditacion_cuip_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_cuip_vigencia.split('T')[0] : '',
+        acreditacion_cuip_fecha: props.c_convocatorias ? (props.c_convocatorias.acreditacion_cuip_fecha ? props.c_convocatorias.acreditacion_cuip_fecha.split('T')[0] : '') : '',
+        acreditacion_cuip_vigencia: props.c_convocatorias ? (props.c_convocatorias.acreditacion_cuip_vigencia ? props.c_convocatorias.acreditacion_cuip_vigencia.split('T')[0] : '') : '',
        
         acreditacion_competencias: props.c_convocatorias ? (props.c_convocatorias.acreditacion_competencias ? 'APROBADO' : '--') : '',
-        acreditacion_competencias_fecha: props.c_convocatorias ? props.c_convocatorias.acreditacion_competencias_fecha.split('T')[0] : '',
-        acreditacion_competencias_vigencia: props.c_convocatorias ? props.c_convocatorias.acreditacion_competencias_vigencia.split('T')[0] : '',
+        acreditacion_competencias_fecha: props.c_convocatorias ? (props.c_convocatorias.acreditacion_competencias_fecha ? props.c_convocatorias.acreditacion_competencias_fecha.split('T')[0] : '') : '',
+        acreditacion_competencias_vigencia: props.c_convocatorias ? (props.c_convocatorias.acreditacion_competencias_vigencia ? props.c_convocatorias.acreditacion_competencias_vigencia.split('T')[0] : '') : '',
 
         acreditacion_desempeno: props.c_convocatorias ? (props.c_convocatorias.acreditacion_desempeno ? 'APROBADO' : '--') : '',
         acreditacion_desempeno_fecha: props.c_convocatorias ? (props.c_convocatorias.acreditacion_desempeno_fecha ? props.c_convocatorias.acreditacion_desempeno_fecha.split('T')[0] : '') : '',
