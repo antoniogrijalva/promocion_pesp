@@ -11,12 +11,14 @@
             <!-- Búsqueda -->
             <div class="mb-4 flex justify-between items-center">
                 <input 
+                    id="inputbusqueda"
                     v-model="globalFilter" 
                     type="text" 
                     placeholder="Buscar..." 
                     class="border border-gray-300 rounded px-4 py-2 w-full max-w-sm"
                 />
                 <select 
+                    id="select_registros"
                     v-model="pageSize" 
                     class="border border-gray-300 rounded px-7 text-sm py-2"
                     @change="table.setPageSize(Number($event.target.value))"

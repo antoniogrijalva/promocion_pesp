@@ -25,7 +25,7 @@
                     </div>
                     <div>
                          <label for="fecha" class="block font-medium text-sm text-gray-700">Fecha de Captura:</label>
-                        <input type="date" v-model="convocatoria.fecha" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-yellow-50">
+                        <input type="date" id="fecha" v-model="convocatoria.fecha" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-yellow-50">
                     </div>
 
                     <div class="col-span-2">
@@ -38,8 +38,8 @@
                         <input type="text" id="telefono" v-model="convocatoria.telefono" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200 lowercase" readonly />
                     </div>
                     <div class="col-span-2">
-                        <label for="telefono" class="block font-medium text-sm text-gray-700">Email:</label>
-                        <input type="text" id="telefono" v-model="convocatoria.email" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200 lowercase" readonly />
+                        <label for="correo_email" class="block font-medium text-sm text-gray-700">Email:</label>
+                        <input type="text" id="correo_email" v-model="convocatoria.email" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200 lowercase" readonly />
                     </div>
 
                     <div class="col-span-2">
