@@ -18,6 +18,7 @@ const showingNavigationDropdown = ref(false);
             <nav
                 class="border-b border-gray-100 bg-white"
             >
+           
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
@@ -53,6 +54,13 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Convocatorias
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('permisos_usuarios.index')"
+                                    :active="route().current('permisos_usuarios.index')"
+                                >
+                                    Permisos de Usuarios
+                                </NavLink>
                             </div>
                         </div>
 
@@ -66,8 +74,8 @@ const showingNavigationDropdown = ref(false);
                                                 type="button"
                                                 class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                             >
-                                                {{ $page.props.auth.user.name }}
-
+                                                {{ $page.props.auth.user.name }} 
+ 
                                                 <svg
                                                     class="-me-0.5 ms-2 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"

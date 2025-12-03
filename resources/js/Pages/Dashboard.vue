@@ -28,7 +28,10 @@ import { Head } from '@inertiajs/vue3';
             </div>
         </div>
     </AuthenticatedLayout> -->
-    <main class="container mx-auto mt-4">
-        <h1>Dashboard - {{ $page.props.auth.user.name }}</h1>
+    <main class="container mx-auto _mt-4">
+        <!-- <h1>Dashboard - {{ $page.props.auth.user.name }}</h1> -->
+         <authenticated-layout>
+         </authenticated-layout>
+
     </main>
 </template>

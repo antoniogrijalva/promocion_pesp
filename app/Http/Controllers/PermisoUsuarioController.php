@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permiso_usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\Routing\Router;
 
 class PermisoUsuarioController extends Controller
 {
@@ -12,7 +14,9 @@ class PermisoUsuarioController extends Controller
      */
     public function index()
     {
-        //
+
+        $c_usuarios = User::with('permisoUsuario')->get();
+        return inertia('Promociones/catalogos/Permisos', compact('c_usuarios'));
     }
 
     /**

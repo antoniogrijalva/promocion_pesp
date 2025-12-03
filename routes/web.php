@@ -58,6 +58,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'destroy'])->name('convocatorias.destroy');
    
    Route::get('/convocatorias/pdf/{id}', [ConvocatoriaController::class, 'generarPDF'])->name('convocatorias.pdf');
+
+
+
+   //rutas para permisos de usuarios
+   Route::get('/permisos_usuarios', [App\Http\Controllers\PermisoUsuarioController::class, 'index'])->name('permisos_usuarios.index');
+   Route::get('/permisos_usuarios/{user}/edit', [App\Http\Controllers\PermisoUsuarioController::class, 'edit'])->name('permisos_usuarios.edit');
+   Route::put('/permisos_usuarios/{user}', [App\Http\Controllers\PermisoUsuarioController::class, 'update'])->name('permisos_usuarios.update');
+   
 });
 
 
