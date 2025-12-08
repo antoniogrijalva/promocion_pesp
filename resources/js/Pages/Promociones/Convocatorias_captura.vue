@@ -53,13 +53,26 @@
 
                 </div>
                 
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 m-2">
+                    <div>
+                        <label for="puesto_actual" class="block font-medium text-sm text-gray-700">Puesto Actual:</label>
+                        <input type="text" id="puesto_actual" v-model="convocatoria.puesto_actual" class="mt-1 block w-full p-1 _border-gray-300 rounded-md shadow-sm text-center _bg-slate-200 bg-gradient-to-r from-slate-400 via-gray-900 to-slate-400 text-white" readonly />
+                    </div>
+                 
+                    <div>
+                        <label for="puesto_solicitado" class="block font-medium text-sm text-gray-700">Puesto al que <b>aspira</b>:</label>
+                        <input type="text" id="puesto_solicitado" v-model="convocatoria.puesto_solicitado" class="mt-1 block w-full p-1 _border-slate-900 rounded-md text-center shadow-sm bg-gradient-to-r from-slate-900 via-sky-600 to-slate-900  text-white" readonly />
+                    </div>
+
+                </div>
+
                 <hr class="mx-4">
                 <!-- <div class="text-center font-bold text-sm mt-4 bg-slate-700 rounded-md p-1 shadow-sm m-2 text-white">
                     ACREDITACIONES
                 </div> -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 m-2">
                     <div>
-                        <label for="acreditacion_cuip" class="block font-medium text-sm bg-sky-700 rounded p-0.5 text-white text-center">Certificado Unico Policial</label>
+                        <label for="acreditacion_cuip" class="block font-medium text-sm bg-slate-900 rounded p-0.5 text-white text-center">Certificado Unico Policial</label>
                         <input type="text" id="acreditacion_cuip" v-model="convocatoria.acreditacion_cuip" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
 
                         <label for="acreditacion_cuip_fecha" class="block font-medium text-sm text-gray-700 mt-2">Fecha:</label>
@@ -70,7 +83,7 @@
 
                     <div>
                         
-                        <label for="acreditacion_competencias" class="block font-medium text-sm bg-sky-700 rounded p-0.5 text-white text-center">Competencias Básicas</label>
+                        <label for="acreditacion_competencias" class="block font-medium text-sm bg-slate-900 rounded p-0.5 text-white text-center">Competencias Básicas</label>
                         <input type="text" id="acreditacion_competencias" v-model="convocatoria.acreditacion_competencias" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
                         <label for="acreditacion_competencias_fecha" class="block font-medium text-sm text-gray-700 mt-2">Fecha:</label>
                         <input type="date" id="acreditacion_competencias_fecha" v-model="convocatoria.acreditacion_competencias_fecha" :class="convocatoria.acreditacion_competencias_fecha ? '' : 'text-gray-300'" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
@@ -79,7 +92,7 @@
                     </div>
 
                     <div>
-                        <label for="acreditacion_desempeno" class="block font-medium text-sm bg-sky-700 rounded p-0.5 text-white text-center">Evaluación del Desempeño</label>
+                        <label for="acreditacion_desempeno" class="block font-medium text-sm bg-slate-900 rounded p-0.5 text-white text-center">Evaluación del Desempeño</label>
                         <input type="text" id="acreditacion_desempeno" v-model="convocatoria.acreditacion_desempeno" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
                         <label for="acreditacion_desempeno_fecha" class="block font-medium text-sm text-gray-700 mt-2">Fecha:</label>
                         <input type="date" id="acreditacion_desempeno_fecha" v-model="convocatoria.acreditacion_desempeno_fecha" :class="convocatoria.acreditacion_desempeno_fecha ? '' : 'text-gray-300'" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
@@ -89,7 +102,7 @@
                     </div>
 
                     <div>
-                        <label for="acreditacion_c3" class="block font-medium text-sm bg-sky-700 rounded p-0.5 text-white text-center">Evaluacion C3</label>
+                        <label for="acreditacion_c3" class="block font-medium text-sm bg-slate-900 rounded p-0.5 text-white text-center">Evaluacion C3</label>
                         <input type="text" id="acreditacion_c3" v-model="convocatoria.acreditacion_c3" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
                         <label for="acreditacion_c3_fecha" class="block font-medium text-sm text-gray-700 mt-2">Fecha:</label>
                         <input type="date" id="acreditacion_c3_fecha" v-model="convocatoria.acreditacion_c3_fecha" :class="convocatoria.acreditacion_c3_fecha ? '' : 'text-gray-300'" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
@@ -105,18 +118,7 @@
                 <!-- <div class="text-center font-bold text-sm mt-4 bg-slate-700 rounded-md p-1 m-2 text-white">
                     PUESTO AL QUE ASPIRA EN LA PROMOCIÓN
                 </div> -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 m-2">
-                    <div>
-                        <label for="puesto_actual" class="block font-medium text-sm text-gray-700">Puesto Actual:</label>
-                        <input type="text" id="puesto_actual" v-model="convocatoria.puesto_actual" class="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm bg-slate-200" readonly />
-                    </div>
-                 
-                    <div>
-                        <label for="puesto_solicitado" class="block font-medium text-sm text-gray-700">Puesto al que <b>aspira</b>:</label>
-                        <input type="text" id="puesto_solicitado" v-model="convocatoria.puesto_solicitado" class="mt-1 block w-full p-1 border-sky-500 rounded-md text-center shadow-sm bg-gradient-to-r from-slate-900 via-sky-600 to-slate-900  text-white" readonly />
-                    </div>
-
-                </div>
+                
 
             
                 <div class="md:col-span-2 lg:col-span-3">
