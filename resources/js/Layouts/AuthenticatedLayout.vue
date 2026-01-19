@@ -59,7 +59,7 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('permisos_usuarios.index')"
                                     :active="route().current('permisos_usuarios.index')"
                                 >
-                                    Permisos de Usuarios
+                                    Permisos de Usuarios (admin)
                                 </NavLink>
                             </div>
                         </div>
