@@ -14,9 +14,9 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-white _bg-gray-100">
             <nav
-                class="border-b border-gray-100 bg-white"
+                class="border-b border-gray-100 bg-slate-100 shadow _bg-white"
             >
            
                 <!-- Primary Navigation Menu -->
@@ -45,6 +45,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink
                                     :href="route('periodos.index')"
                                     :active="route().current('periodos.index')"
+                                    v-if="$page.props.auth.user.tipo_usuario==='administrador'"
                                 >
                                     Periodos
                                 </NavLink>
@@ -58,6 +59,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink
                                     :href="route('permisos_usuarios.index')"
                                     :active="route().current('permisos_usuarios.index')"
+                                    v-if="$page.props.auth.user.tipo_usuario==='administrador'"
                                 >
                                     Permisos de Usuarios (admin)
                                 </NavLink>
@@ -203,10 +205,10 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Heading -->
             <header
-                class="bg-white shadow"
+                class="bg-slate-50 shadow"
                 v-if="$slots.header"
             >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-7xl px-4 py-2 _py-6 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>

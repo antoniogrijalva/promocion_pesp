@@ -55,12 +55,12 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 m-2">
                     <div>
-                        <label for="puesto_actual" class="block font-medium text-sm text-gray-700">Puesto Actual:</label>
+                        <label for="puesto_actual" class="block font-medium text-sm text-gray-700">Grado Actual:</label>
                         <input type="text" id="puesto_actual" v-model="convocatoria.puesto_actual" class="mt-1 block w-full p-1 _border-gray-300 rounded-md shadow-sm text-center _bg-slate-200 bg-gradient-to-r from-slate-400 via-gray-900 to-slate-400 text-white" readonly />
                     </div>
                  
                     <div>
-                        <label for="puesto_solicitado" class="block font-medium text-sm text-gray-700">Puesto al que <b>aspira</b>:</label>
+                        <label for="puesto_solicitado" class="block font-medium text-sm text-gray-700">Grado al que <b>aspira</b>:</label>
                         <input type="text" id="puesto_solicitado" v-model="convocatoria.puesto_solicitado" class="mt-1 block w-full p-1 _border-slate-900 rounded-md text-center shadow-sm bg-gradient-to-r from-slate-900 via-sky-600 to-slate-900  text-white" readonly />
                     </div>
 

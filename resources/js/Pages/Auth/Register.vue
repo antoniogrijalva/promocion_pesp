@@ -11,6 +11,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    tipo_usuario: 'capturista',
 });
 
 const submit = () => {
@@ -90,6 +91,23 @@ const submit = () => {
                     class="mt-2"
                     :message="form.errors.password_confirmation"
                 />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="tipo_usuario" value="Tipo de Usuario" />
+
+                <select
+                    id="tipo_usuario"
+                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    v-model="form.tipo_usuario"
+                    required
+                >
+                    <option value="capturista">Capturista</option>
+                    <option value="supervisor">Supervisor</option>
+                    <option value="administrador">Administrador</option>
+                </select>
+
+                <InputError class="mt-2" :message="form.errors.tipo_usuario" />
             </div>
 
             <div class="mt-4 flex items-center justify-end">

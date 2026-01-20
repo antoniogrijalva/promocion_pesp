@@ -51,7 +51,7 @@
                         </div>
                                                                       
                         <div class="mt-3 bg-slate-200  border border-gray-300  p-2 rounded">
-                            <label for="puesto" class="block mb-0 text-xs mt-3 ">Puesto:</label>
+                            <label for="puesto" class="block mb-0 text-xs mt-3 ">Grado:</label>
                             <select v-model="empleado.puesto" id="puesto" class="w-full text-sm border border-gray-300 px-3 py-1 rounded" required>
                                 <option value="">Seleccione un puesto</option>
                                 <option value="POLICIA TERCERO">POLICIA TERCERO</option>
@@ -178,7 +178,7 @@
              
 
                
-                <div class="text-end">
+                <div class="text-end" v-if="$page.props.auth.user.tipo_usuario != 'capturista'">
                 <button type="submit" class="bg-blue-800 hover:bg-blue-500 text-white px-4 py-1 rounded text-sm shadow mb-4">
                     {{ c_empleados ? 'Actualizar Empleado' : 'Guardar Empleado' }}
                 </button>

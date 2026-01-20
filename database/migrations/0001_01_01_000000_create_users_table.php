@@ -17,6 +17,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('tipo_usuario')->default('capturasita');
+            /*
+            capturista    -- solo puede capturar convocatorias
+            supervisor    -- puede hacer todo excepto usuarios
+            administrador
+
+             */
+             
             $table->rememberToken();
             $table->timestamps();
         });

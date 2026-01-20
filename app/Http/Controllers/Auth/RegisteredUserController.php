@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'tipo_usuario' => $request->tipo_usuario,
         ]);
 
         event(new Registered($user));
@@ -47,5 +48,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+        //return redirect(route('/', absolute: false));
     }
 }

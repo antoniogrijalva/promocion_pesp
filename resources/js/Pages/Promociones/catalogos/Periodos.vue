@@ -1,12 +1,18 @@
 <template>
     <authenticated-layout>
-        <main class="container mx-auto mt-4">
-            <div class="flex justify-between items-center mb-2">
-                <h1 class="font-bold text-2xl">Periodos</h1>
+        <template #header>
+           
+            <div class="flex justify-between items-center">
+                 <h1 class="font-bold text-2xl">Periodos</h1>
                 <button @click="agregarPeriodo" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
                     + Agregar Periodo
                 </button>
             </div>
+        
+        </template>
+        
+        <main class="container mx-auto mt-4">
+            
 
             <!-- Aquí puedes agregar la tabla o lista de periodos -->
              <div class="overflow-x-auto">
