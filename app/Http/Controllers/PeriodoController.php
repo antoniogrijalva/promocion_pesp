@@ -31,6 +31,14 @@ class PeriodoController extends Controller
      */
     public function store(Request $request)
     {
+
+        //preguntar si hay un registro en el modelo Periodo donde activo sea true y el id sea diferente al del periodo que se esta editando
+        $existeActivo = Periodo::where('activo', true)
+            ->exists();
+        if ($request->activo && $existeActivo) {
+            return redirect()->back()->withErrors(['activo' => 'Ya existe un periodo activo. Solo puede haber un periodo activo a la vez.']);
+        }
+
         Periodo::create($request->all());
         return redirect()->route('periodos.index');
 

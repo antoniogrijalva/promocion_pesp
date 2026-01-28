@@ -146,28 +146,40 @@ const props = defineProps({
 });
 
 const globalFilter = ref('');
-const pageSize = ref(10);
+const pageSize = ref(20);
 
 const columns = [
     {
         accessorKey: 'num_empleado',
         header: 'Num Empleado',
     },
+            // {
+            //     accessorKey: 'nombre',
+            //     header: 'Nombre',
+            // },
+            //  {
+            //     accessorKey: 'primer_apellido',
+            //     header: 'Primer Apellido',
+            // },
+            //  {
+            //     accessorKey: 'segundo_apellido',
+            //     header: 'Segundo Apellido',
+            // },
     {
-        accessorKey: 'nombre',
-        header: 'Nombre',
+        accessorKey: 'nombre_completo',
+        header: 'Nombre Completo',
     },
-     {
-        accessorKey: 'primer_apellido',
-        header: 'Primer Apellido',
-    },
-     {
-        accessorKey: 'segundo_apellido',
-        header: 'Segundo Apellido',
+    {
+        accessorKey: 'fecha_ingreso',
+        header: 'Fecha de Ingreso',
+        cell: ({ getValue }) => {
+            const fecha = new Date(getValue());
+            return fecha.toLocaleDateString();
+        },
     },
     {
         accessorKey: 'puesto',
-        header: 'Puesto',
+        header: 'Grado',
     },
     {
         accessorKey: 'telefono',
@@ -232,7 +244,7 @@ const table = useVueTable({
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
         pagination: {
-            pageSize: 10,
+            pageSize: 20,
         },
     },
     state: {

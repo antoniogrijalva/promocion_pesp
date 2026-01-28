@@ -25,9 +25,9 @@ return new class extends Migration
 
 
             //informacion de como estaban los datos de certficacion del elemento policial al realizar el registro 
-                $table->string('acreditacion_cuip')->nullable();
-                $table->date('acreditacion_cuip_fecha')->nullable();
-                $table->date('acreditacion_cuip_vigencia')->nullable();
+                $table->string('acreditacion_cup')->nullable();
+                $table->date('acreditacion_cup_fecha')->nullable();
+                $table->date('acreditacion_cup_vigencia')->nullable();
 
 
                 $table->boolean('acreditacion_formacion');
@@ -47,6 +47,10 @@ return new class extends Migration
                 $table->date('acreditacion_desempeno_fecha')->nullable();
                 $table->date('acreditacion_desempeno_vigencia')->nullable();
                 $table->decimal('acreditacion_desempeno_calificacion', 5, 2)->nullable();
+
+                $table->boolean('cancelada')->default(false);
+                $table->date('fecha_cancelacion')->nullable();
+                $table->text('motivo_cancelacion')->nullable();
 
             $table->timestamps();
         });

@@ -18,8 +18,8 @@ class Convocatoria extends Model
         'observaciones',
         'periodo_id',
 
-        'acreditacion_cuip_fecha',
-        'acreditacion_cuip_vigencia',
+        'acreditacion_cup_fecha',
+        'acreditacion_cup_vigencia',
                
         'acreditacion_competencias',
         'acreditacion_competencias_fecha',
@@ -36,8 +36,8 @@ class Convocatoria extends Model
         'acreditacion_desempeno_calificacion',
     ];
     protected $casts = [
-        'acreditacion_cuip_fecha' => 'date',
-        'acreditacion_cuip_vigencia' => 'date',
+        'acreditacion_cup_fecha' => 'date',
+        'acreditacion_cup_vigencia' => 'date',
                
         'acreditacion_competencias' => 'boolean',
         'acreditacion_competencias_fecha' => 'date',

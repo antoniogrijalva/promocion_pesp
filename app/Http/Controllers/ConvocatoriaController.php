@@ -63,7 +63,7 @@ class ConvocatoriaController extends Controller
 
         //validar que este empleado no tenga ya una convocatoria en el periodo activo
         $existingConvocatoria = Convocatoria::where('empleado_id', $validated['empleado_id'])
-            ->where('periodo_id', $validated['periodo_id'])
+            ->where('periodo_id', $validated['periodo_id'] )->where('cancelada', false)
             ->first();
 
         if ($existingConvocatoria) {
@@ -83,9 +83,9 @@ class ConvocatoriaController extends Controller
         $convocatoria->acreditacion_formacion = $request->input('acreditacion_formacion') === 'APROBADO' ? true : false;
         $convocatoria->acreditacion_formacion_fecha = $request->input('acreditacion_formacion_fecha');
 
-        $convocatoria->acreditacion_cuip = $request->input('acreditacion_cuip');
-        $convocatoria->acreditacion_cuip_fecha = $request->input('acreditacion_cuip_fecha');       
-        $convocatoria->acreditacion_cuip_vigencia = $request->input('acreditacion_cuip_vigencia');
+        $convocatoria->acreditacion_cup = $request->input('acreditacion_cup');
+        $convocatoria->acreditacion_cup_fecha = $request->input('acreditacion_cup_fecha');       
+        $convocatoria->acreditacion_cup_vigencia = $request->input('acreditacion_cup_vigencia');
 
         $convocatoria->acreditacion_competencias = $request->input('acreditacion_competencias') === 'APROBADO' ? true : false;
         $convocatoria->acreditacion_competencias_fecha = $request->input('acreditacion_competencias_fecha');
@@ -152,7 +152,15 @@ class ConvocatoriaController extends Controller
     public function destroy(Convocatoria $convocatoria)
     {
         //elimina la convocatoria
-        $convocatoria->delete();
+       // $convocatoria->delete();
+       
+       //cambiar el estado a cancelada
+       
+       $convocatoria->cancelada = true;
+       $convocatoria->fecha_cancelacion = now();
+       $convocatoria->motivo_cancelacion = 'Cancelada por el usuario: ' . auth()->user()->name;
+       $convocatoria->save();
+        return redirect()->route('convocatorias.index')->with('success', 'Convocatoria cancelada exitosamente.');
 
         
         

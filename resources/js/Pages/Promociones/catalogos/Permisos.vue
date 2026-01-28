@@ -28,7 +28,7 @@
                             <td class="border px-4 py-0">{{user.id  }}           </td>
                             <td class="border px-4 py-0">{{ user.name }}       </td>
                             <td class="border px-4 py-0">{{ user.email }}      </td>
-                            <td class="border px-4 py-0">{{ user.permiso_usuario?.admin ? 'Administrador' : '--' }}       </td>
+                            <td class="border px-4 py-0">{{ user.tipo_usuario }}       </td>
                             <td class="border px-4 py-0 text-center">
                                 <!-- Aquí puedes agregar botones para editar los permisos del usuario -->
                                 <button @click="router.visit(route('permisos_usuarios.edit', user.id))" class="bg-orange-500 hover:bg-orange-400 text-white px-1.5 py-0.5

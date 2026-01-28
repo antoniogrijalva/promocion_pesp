@@ -65,6 +65,7 @@
                             v-for="cell in row.getVisibleCells()" 
                             :key="cell.id"
                             class="border border-gray-300 px-2 py-0.5 text-[13px]"
+                            :class="{ 'bg-red-200    ': row.original.cancelada }"
                         >
                             <FlexRender
                                 :render="cell.column.columnDef.cell"
@@ -141,9 +142,18 @@ const props = defineProps({
 });
 
 const globalFilter = ref('');
-const pageSize = ref(10);
+const pageSize = ref(20);
 
 const columns = [
+    //agregar el id de la convocatoria
+    {
+        accessorKey: 'id',
+        header: 'Folio',
+        cell: ({ row, getValue }) => h('span', {
+            class: row.original.cancelada ? 'bg-red-500 text-white px-2 py-0.5 rounded' : 'bg-green-700 text-white px-2 py-0.5 rounded'
+        }, getValue())
+    },
+
     {
         accessorKey: 'fecha',
         header: 'Fecha Registro',
@@ -168,11 +178,11 @@ const columns = [
     {
         id: 'nombre_completo',
         header: 'Nombre Completo',
-        accessorFn: (row) => `${row.empleado.primer_apellido} ${row.empleado.segundo_apellido} ${row.empleado.nombre}`,
+        accessorFn: (row) => `${row.empleado.nombre_completo}`,
     },
     {
         accessorKey: 'puesto_solicitado',
-        header: 'Puesto al que aspira',
+        header: 'Grado al que Aspira',
     },
     {
         accessorKey: 'empleado.telefono',
@@ -188,37 +198,47 @@ const columns = [
     {
         id: 'acciones',
         header: 'Acciones',
-        cell: ({ row }) => h(
-            'div',
-            { class: 'flex gap-2' },
-            [
-                
-                h('button',
+        cell: ({ row }) => {
+            if (row.original.cancelada) {
+                return h(
+                    'span',
                     {
-                        class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
-                        onClick: () => editarConvocatoria(row.original),
-                        title: 'Editar empleado'
+                        class: 'bg-red-600 text-white px-2 py-0.5 rounded text-xs font-semibold'
                     },
-                    h('i', { class: 'fas fa-sm fa-edit' })
-                ),
-                 h('button',
-                    {
-                        class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
-                        onClick: () => imprimirConvocatoria(row.original),
-                        title: 'Imprimir Registro'
-                    },
-                    h('i', { class: 'fas fa-sm fa-print' })
-                ) ,
-                h('button',
-                    {
-                        class: 'bg-red-800 text-white px-2 _py-1 rounded hover:bg-red-600',
-                        onClick: () => eliminaConvocatoria(row.original),
-                        title: 'Eliminar'
-                    },
-                    h('i', { class: 'fas fa-sm fa-trash' })
-                ),
-            ]
-        ),
+                    'Folio Cancelado'
+                );
+            }
+            return h(
+                'div',
+                { class: 'flex gap-2' },
+                [
+                    h('button',
+                        {
+                            class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
+                            onClick: () => editarConvocatoria(row.original),
+                            title: 'Editar empleado'
+                        },
+                        h('i', { class: 'fas fa-sm fa-edit' })
+                    ),
+                    h('button',
+                        {
+                            class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
+                            onClick: () => imprimirConvocatoria(row.original),
+                            title: 'Imprimir Registro'
+                        },
+                        h('i', { class: 'fas fa-sm fa-print' })
+                    ),
+                    h('button',
+                        {
+                            class: 'bg-red-800 text-white px-2 _py-1 rounded hover:bg-red-600',
+                            onClick: () => eliminaConvocatoria(row.original),
+                            title: 'Eliminar'
+                        },
+                        h('i', { class: 'fas fa-sm fa-trash' })
+                    ),
+                ]
+            );
+        },
     },
 ];
 
@@ -242,7 +262,7 @@ const table = useVueTable({
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
         pagination: {
-            pageSize: 10,
+            pageSize: 20,
         },
     },
     state: {

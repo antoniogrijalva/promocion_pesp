@@ -20,22 +20,26 @@
                     <thead class="bg-slate-800 text-white">
                         <tr>
                             <th class="border px-4 py-0">ID</th>
-                            <th class="border px-4 py-0">Periodo</th>
+                            <th class="border px-4 py-0">Promoción</th>
+                            <th class="border px-4 py-0">Descripción</th>
                             <th class="border px-4 py-0">Fecha de Inicio</th>
                             <th class="border px-4 py-0">Fecha de Fin</th>
-                            <th class="border px-4 py-0">Descripción</th>
                             <th class="border px-4 py-0">Activo</th>
                             <th class="border px-4 py-0">acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="periodo in $page.props.periodos" :key="periodo.id" :class="{ ' font-bold': periodo.activo }">
+                        <tr v-for="periodo in $page.props.periodos" :key="periodo.id" :class="{ ' bg-green-100': periodo.activo }">
                             <td class="border px-4 py-0">{{ periodo.id }}           </td>
                             <td class="border px-4 py-0">{{ periodo.nombre }}       </td>
+                            <td class="border px-4 py-0 text-xs text-gray-600">{{ periodo.descripcion }}  </td>
                             <td class="border px-4 py-0"><input id="fecha_inicio" class="p-0 bg-transparent border-0" type="date" :value="periodo.fecha_inicio.split('T')[0]"></input></td>
                             <td class="border px-4 py-0"><input id="fecha_fin" class="p-0 bg-transparent border-0" type="date" :value="periodo.fecha_fin.split('T')[0]"></input></td>
-                            <td class="border px-4 py-0">{{ periodo.descripcion }}  </td>
-                            <td class="border px-4 py-1 text-center "><span :class="periodo.activo ? 'bg-sky-700' : 'bg-slate-500'" class=" font-thin  px-1.5 py-1 text-white rounded-full">{{ periodo.activo ? 'Sí' : 'No' }}</span></td>
+                            <td class="border px-4 py-1 text-center ">
+                                <span :class="periodo.activo ? 'text-green-500' : 'text-red-600'" class=" font-bold  ">
+                                    {{ periodo.activo ? '✓' : '✗'}}
+                                </span>
+                            </td>
                             <td class="border px-4 py-0 text-center">
                                 <!-- Aquí puedes agregar botones para editar o eliminar el periodo -->
                                 <button @click="router.visit(route('periodos.edit', periodo.id))" class="bg-orange-500 hover:bg-orange-400 text-white px-2 py-1 text-sm rounded mr-2">
