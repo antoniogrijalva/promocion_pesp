@@ -14,6 +14,7 @@ class Periodo extends Model
         'fecha_inicio',
         'fecha_fin',
         'descripcion',
+        'nombre_comision',
         'activo'
     ];
 

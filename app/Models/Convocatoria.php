@@ -18,7 +18,7 @@ class Convocatoria extends Model
         'observaciones',
         'periodo_id',
         'cancelada',
-        'fecaha_cancelacion',
+        'fecha_cancelacion',
         'motivo_cancelacion',
 
         

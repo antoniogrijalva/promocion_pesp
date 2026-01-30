@@ -159,14 +159,19 @@
             </table>
         </div> 
             <br>
-            <div class="texto-subtitulo texto-negritas ">
-                Presidente de la Comisión del Servicion Profesional de Carrera, <br>
-                Honor y Justicia de la Policía Estatal de Seguridad Pública <br>
-            </div>
-            <div class="">
-                Presente.-
-            </div>
-            <br><br>
+
+            <table>
+                <tr>
+                    <td class="texto-negritas texto-subtitulo" style="width: 70%;"> {{ $convocatorias->periodo->nombre_comision }}</td>
+                    <td class="texto-negritas" style="width: 30%;"></td>
+                </tr>
+                <tr>
+                    <td>Presente.-</td>
+                </tr>
+            </table>
+ 
+
+
             <div class="container-convocatoria">
                 <div class="texto-principal">
                     Quien suscribe, <u><b>{{ $convocatorias->empleado->nombre_completo }}</b></u>, con número de empleado <u><b>{{ $convocatorias->empleado->num_empleado }}</b></u>, 
@@ -254,7 +259,7 @@
 
          <div class="container-convocatoria">
             <div class="texto-principal">
-                Por este conducto se hace constar que el oficial: <u><b>{{ $convocatorias->empleado->nombre_completo }}</b></u>, con número de empleado <u><b>{{ $convocatorias->empleado->num_empleado }}</b></u>,
+                El {{$convocatorias->puesto_actual}} <u><b>{{ $convocatorias->empleado->nombre_completo }}</b></u>, con número de empleado <u><b>{{ $convocatorias->empleado->num_empleado }}</b></u>,
                 realizó las siguientes evaluaciones que integra el Certificado Único Policial (CUP) con los resultados que a continuación se describen:
             </div>
 
@@ -304,8 +309,10 @@
             </table>
 
             <br><br>
-            <div class="texto-sm texto-italicas">
-                * LA SOLICITUD DEL CERTIFICADO ÚNICO POLICIAL SE ENCUENTRA EN TRÁMITE ANTE LA INSTANCIA CORRESPONDIENTE.
+            <div class="texto-italicas texto-negritas texto-sm centrar-texto">
+                {{ $convocatorias->acreditacion_cup_vigencia < $convocatorias->fecha ? 
+                    ' * LA SOLICITUD DEL CERTIFICADO ÚNICO POLICIAL SE ENCUENTRA EN TRÁMITE ANTE LA INSTANCIA CORRESPONDIENTE' : ''
+                 }}
             </div>
 
              <br><br><br>

@@ -44,6 +44,17 @@
                         required
                     />  
                 </div>
+                 <div class="mb-2">          
+                    <label for="descripcion" class="block text-gray-700 font-bold mb-0">Nombre de la Comisión:</label>
+                    <textarea 
+                        v-model="formulario.nombre_comision" 
+                        id="nombre_comision" 
+                        name="nombre_comision" 
+                        class="border border-gray-300 rounded px-4 py-2 w-full bg-yellow-50"
+                        rows="3"
+                        placeholder="Indicar el nombre de la comisión a la cual seran dirigidos los oficios/convocatorias"
+                    ></textarea>  
+                </div>   
                 <div class="mb-2">          
                     <label for="descripcion" class="block text-gray-700 font-bold mb-0">Descripción:</label>
                     <textarea 
@@ -112,6 +123,7 @@ const formulario = ref({
     fecha_fin: props.c_periodo?.fecha_fin?.split('T')[0] || '',
     descripcion: props.c_periodo?.descripcion || '',
     activo: props.c_periodo?.activo || false,
+    nombre_comision: props.c_periodo?.nombre_comision || '',
 });
 
 const regresar_index = () => {

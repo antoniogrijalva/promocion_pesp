@@ -4,7 +4,8 @@
             <div class="flex justify-between items-center _mb-2">
                <h1 class="font-bold text-2xl">Registro de participación</h1>
                 <button @click="exportarExcel" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
-                    Exportar a excel
+                    <i class="fas fa-lg fa-file-excel "></i> Exportar a excel
+                
                 </button>
 
                 <button @click="agregarRegistro" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 text-sm rounded-md ">
@@ -14,7 +15,7 @@
         
         </template>
         <main class="container mx-auto mt-4">
-            
+           
 
             <!-- Búsqueda -->
             <div class="mb-4 flex justify-between items-center">
@@ -301,18 +302,39 @@ function eliminaConvocatoria(convocatoria) {
    
 
     const exportarExcel = () => {
+
+
+        const formatearFecha = (fecha) => {
+            if (!fecha) return '';
+           
+            const dia = fecha.substring(8, 10);
+            const mes = fecha.substring(5, 7);
+            const anio = fecha.substring(0, 4);
+            return `${dia}/${mes}/${anio}`;
+        };
         // Extraer los datos de empleados
         const data = props.empleados.map(emp => ({
             'Folio': emp.id,
-            'Fecha Registro': emp.fecha,
+            'Fecha Registro': formatearFecha(emp.fecha.split('T')[0]), // Tomar solo la fecha
+            'Estatus': emp.cancelada ? 'CANCELADA' : 'ACTIVA',
             'Convocatoria': emp.periodo?.nombre || '',
             '# Emp.': emp.empleado?.num_empleado || '',
             'Nombre Completo': emp.empleado?.nombre_completo || '',
+            'Grado Actual': emp.puesto_actual || '',
             'Grado al que Aspira': emp.puesto_solicitado || '',
             'Teléfono': emp.empleado?.telefono || '',
             'Capturista': emp.user?.name || '',
-            'Cancelada': emp.cancelada ? 'Sí' : 'No'
+           
+            // 'Vigencia CUP': emp.acreditacion_cup_vigencia.split('T')[0],
+            // 'Vigencia CB': emp.acreditacion_competencias_vigencia.split('T')[0],
+            // 'Vigencia Ev. Desemp.': emp.acreditacion_desempeno_vigencia?.split('T')[0],
+            // 'Vigencia C3': emp.acreditacion_c3_vigencia.split('T')[0],
+            'Vigencia CUP': formatearFecha(emp.acreditacion_cup_vigencia.split('T')[0]),
+            'Vigencia CB': formatearFecha(emp.acreditacion_competencias_vigencia.split('T')[0]),
+            'Vigencia Ev. Desemp.': formatearFecha(emp.acreditacion_desempeno_vigencia?.split('T')[0]),
+            'Vigencia C3': formatearFecha(emp.acreditacion_c3_vigencia.split('T')[0]),
         }));
+      
 
         // Crear hoja y libro
         const worksheet = XLSX.utils.json_to_sheet(data);
