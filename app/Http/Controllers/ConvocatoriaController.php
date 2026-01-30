@@ -178,12 +178,14 @@ class ConvocatoriaController extends Controller
     public function generarPDF($id_convocatoria)
     {
 
-        $convocatorias = Convocatoria::with('user')->with('empleado')->where('id', $id_convocatoria)->first();
+        $convocatorias = Convocatoria::with('user')->with('empleado')->with('periodo')->where('id', $id_convocatoria)->first();
         $data = [
             'titulo' => 'Reporte de Convocatorias',
             'convocatorias' => $convocatorias,
         ];
-        $pdf = Pdf::loadView('pdf.convocatorias', $data);
+
+        //dd( $data );
+        $pdf = Pdf::loadView('pdf.convocatoria_descarga', $data);
         return $pdf->download('convocatorias.pdf');
     }
 }

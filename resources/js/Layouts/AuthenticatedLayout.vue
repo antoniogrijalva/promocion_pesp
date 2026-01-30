@@ -14,7 +14,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-white _bg-gray-100">
+        <div class="min-h-screen  _bg-white bg-gray-50">
             <nav
                 class="border-b border-gray-100 bg-slate-100 shadow _bg-white"
             >
@@ -205,7 +205,7 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Heading -->
             <header
-                class="bg-slate-50 shadow"
+                class="bg-white shadow"
                 v-if="$slots.header"
             >
                 <div class="mx-auto max-w-7xl px-4 py-2 _py-6 sm:px-6 lg:px-8">

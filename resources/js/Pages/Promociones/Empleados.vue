@@ -7,7 +7,7 @@
 
                 <button 
                 @click="agregarEmpleado" 
-                class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 text-sm rounded-md"
                 v-if="$page.props.auth.user.tipo_usuario != 'capturista'"
                 >
                     + Agregar Empleado  

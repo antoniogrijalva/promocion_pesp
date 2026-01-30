@@ -2,12 +2,7 @@
     <authenticated-layout>
 
         <main class="container mx-auto mt-4">
-            <div class="flex justify-between items-center mb-0">
-                
-                <button @click="regresar_index" class="bg-slate-500 hover:bg-slate-700 text-white px-2 py-1 text-sm rounded">
-                     ← Regresar 
-                </button>
-            </div>
+           
 
             <!-- captura de informacion de periodos -->
             <form 
@@ -73,12 +68,20 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <button 
+                     <div class="flex justify-between items-center mb-0">
+                
+                        <button @click="regresar_index" class="bg-slate-500 hover:bg-slate-700 text-white px-4 py-1  rounded">
+                            Cancelar 
+                        </button>
+
+                        <button 
                         type="submit" 
                         class="bg-blue-800 hover:bg-blue-600 text-white px-4 py-1 rounded"
-                    >
-                        {{ c_periodo ? 'Actualizar Periodo' : 'Crear Periodo' }}
-                    </button>
+                        >
+                            {{ c_periodo ? 'Actualizar Periodo' : 'Crear Periodo' }}
+                        </button>
+                    </div>
+                   
 
                 </div>
             </form>

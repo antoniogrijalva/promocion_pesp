@@ -3,7 +3,11 @@
          <template #header> 
             <div class="flex justify-between items-center _mb-2">
                <h1 class="font-bold text-2xl">Registro de participación</h1>
-                <button @click="agregarRegistro" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
+                <button @click="exportarExcel" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
+                    Exportar a excel
+                </button>
+
+                <button @click="agregarRegistro" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 text-sm rounded-md ">
                     + Agregar Registro
                 </button>
             </div>
@@ -128,6 +132,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router } from '@inertiajs/vue3';
 import { ref, h } from 'vue';
+
+ import * as XLSX from 'xlsx';
+
 import {
     useVueTable,
     FlexRender,
@@ -138,7 +145,8 @@ import {
 } from '@tanstack/vue-table';
 
 const props = defineProps({
-    empleados: Array
+    empleados: Array 
+
 });
 
 const globalFilter = ref('');
@@ -288,4 +296,31 @@ function eliminaConvocatoria(convocatoria) {
         router.get(route('convocatorias.index') );
     }
 }
+
+
+   
+
+    const exportarExcel = () => {
+        // Extraer los datos de empleados
+        const data = props.empleados.map(emp => ({
+            'Folio': emp.id,
+            'Fecha Registro': emp.fecha,
+            'Convocatoria': emp.periodo?.nombre || '',
+            '# Emp.': emp.empleado?.num_empleado || '',
+            'Nombre Completo': emp.empleado?.nombre_completo || '',
+            'Grado al que Aspira': emp.puesto_solicitado || '',
+            'Teléfono': emp.empleado?.telefono || '',
+            'Capturista': emp.user?.name || '',
+            'Cancelada': emp.cancelada ? 'Sí' : 'No'
+        }));
+
+        // Crear hoja y libro
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Convocatorias');
+
+        // Descargar archivo
+        XLSX.writeFile(workbook, 'convocatorias.xlsx');
+    };
+
 </script>

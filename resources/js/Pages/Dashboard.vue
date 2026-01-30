@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Promociones" />
 
     <!-- <AuthenticatedLayout>
         <template #header>
@@ -43,18 +43,20 @@ import { Head } from '@inertiajs/vue3';
                             Sistema de Promociones PESP
                         </div>
                     </div>
+
+                </div>
+                <div class="flex justify-center mt-6">
+                    <!-- <img  src="/img/estrella_pesp.png" alt=""> -->
+                    <!-- <img  src="/img/pesp_logo_listonrosa.jpg" alt=""> -->
+                    <img  src="/img/logo_sidepol.jpeg" alt="">
+
+
                 </div>
             </div>
 
             
 
-            <div class="m-4 text-end text-gray-400">
-                Fecha: {{ new Date().toLocaleDateString() }} <br/>
-                Hora: {{ new Date().toLocaleTimeString() }}
-            </div>
-
-            <!-- <img  src="/img/estrella_pesp.png" alt=""> -->
-            <img  src="/img/pesp_logo_listonrosa.jpg" alt="">
+           
             
             
 

@@ -38,6 +38,8 @@ class Convocatoria extends Model
     protected $casts = [
         'acreditacion_cup_fecha' => 'date',
         'acreditacion_cup_vigencia' => 'date',
+
+        'puesto_fecha' => 'date',
                
         'acreditacion_competencias' => 'boolean',
         'acreditacion_competencias_fecha' => 'date',

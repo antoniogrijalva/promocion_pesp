@@ -4,7 +4,7 @@
            
             <div class="flex justify-between items-center">
                  <h1 class="font-bold text-2xl">Periodos</h1>
-                <button @click="agregarPeriodo" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
+                <button @click="agregarPeriodo" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 text-sm rounded-md">
                     + Agregar Periodo
                 </button>
             </div>
