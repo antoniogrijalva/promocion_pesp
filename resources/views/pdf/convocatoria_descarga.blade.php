@@ -91,18 +91,33 @@
             
         }
 
+        .texto-sm {
+            font-size: 7pt;
+        }
+
+        .texto-md {
+            font-size: 10pt;
+        }
+        .texto-lg {
+            font-size: 14pt;
+        }
+
+        .texto-derecha {
+            text-align: right;
+        }
+
         .texto-italicas {
             font-style: italic;
         }
         
         .recuadro-fondo {
-            border: .5px solid #555555;
-            background-color: #e0e0e0;
+            /* border: .5px solid #555555; */
+            background-color: #000000;
             padding-left: 10px;
             padding-right: 10px;
             padding-top : 3px;
             padding-bottom : 3px;
-
+            color: #ffffff;
             border-radius: 5px;
             font-weight: bold;
         }
@@ -193,7 +208,7 @@
                 
                 <div  class="container-convocatoria centrar-texto">
                     <hr>
-                    <div class=texto-negritas ">{{$convocatorias->empleado->nombre_completo}}</div>
+                    <div class="texto-negritas ">{{$convocatorias->empleado->nombre_completo}}</div>
                 </div>
                 
                 
@@ -220,8 +235,8 @@
 
 
         <div style="page-break-before: always;"></div>
+
         <div class="container-encabezado">
-              
              <table>
                 <tr class="">
                     <td class="centrar-texto " style="width: 20%;"><img src="img/logo_seisp.jpeg"  style="height: 80px; width: auto;"></td>
@@ -232,9 +247,80 @@
                     <td class="centrar-texto " style="width: 20%;"><img src="{{ public_path('img/logo_pesp.jpeg')}}"  style="height: 80px; width: auto;"></td>    
                 </tr>
             </table>
-            
-                
         </div>
+
+        <br>
+         <div class="texto-sm texto-derecha texto-italicas"><b>Elaboró:</b> {{ $convocatorias->user->name }}</div>
+
+         <div class="container-convocatoria">
+            <div class="texto-principal">
+                Por este conducto se hace constar que el oficial: <u><b>{{ $convocatorias->empleado->nombre_completo }}</b></u>, con número de empleado <u><b>{{ $convocatorias->empleado->num_empleado }}</b></u>,
+                realizó las siguientes evaluaciones que integra el Certificado Único Policial (CUP) con los resultados que a continuación se describen:
+            </div>
+
+            <br><br><br>
+            <div class="recuadro-fondo texto-md">EVALUACION DE CONTROL Y CONFIANZA - C3</div>
+            <table>
+                <tr>
+                    <td style="width: 20%;" class="texto-negritas">Estatus</td>
+                    <td style="width: 20%;" class="texto-negritas">Evaluacion</td>
+                    <td style="width: 20%;" class="texto-negritas">Vigencia</td>
+                </tr>
+                <tr>
+                    <td class="texto-sm">{{ $convocatorias->acreditacion_c3 ? 'APROBADO' : '' }}</td>    
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_c3_fecha)->format('d/m/Y') }}</td>
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_c3_vigencia)->format('d/m/Y') }}</td>
+                </tr>
+            </table>
+
+            <br><br>
+            <div class="recuadro-fondo texto-md">COMPETENCIAS BÁSICAS</div>
+            <table>
+                <tr>
+                    <td style="width: 20%;" class="texto-negritas">Estatus</td>
+                    <td style="width: 20%;" class="texto-negritas">Evaluacion</td>
+                    <td style="width: 20%;" class="texto-negritas">Vigencia</td>
+                </tr>
+                <tr>
+                    <td class="texto-sm">{{ $convocatorias->acreditacion_competencias_basicas_vigencia > $convocatorias->fecha ? 'VIGENTES' : '' }}</td>    
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_basicas_fecha)->format('d/m/Y') }}</td>
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_basicas_vigencia)->format('d/m/Y') }}</td>
+                </tr>
+            </table>
+
+            <br><br>
+            <div class="recuadro-fondo texto-md">EVALUACIÓN DEL DESEMPEÑO</div>
+            <table>
+                <tr>
+                    <td style="width: 20%;" class="texto-negritas">Estatus</td>
+                    <td style="width: 20%;" class="texto-negritas">Evaluacion</td>
+                    <td style="width: 20%;" class="texto-negritas">Vigencia</td>
+                </tr>
+                <tr>
+                    <td class="texto-sm">{{ $convocatorias->acreditacion_desempeno_vigencia > $convocatorias->fecha ? 'VIGENTES' : '' }}</td>    
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_desempeno_fecha)->format('d/m/Y') }}</td>
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_desempeno_vigencia)->format('d/m/Y') }}</td>
+                </tr>
+            </table>
+
+            <br><br>
+            <div class="texto-sm texto-italicas">
+                * LA SOLICITUD DEL CERTIFICADO ÚNICO POLICIAL SE ENCUENTRA EN TRÁMITE ANTE LA INSTANCIA CORRESPONDIENTE.
+            </div>
+
+             <br><br><br>
+            <div class="texto-principal ">
+               Lo anterior se hace constar para los fines legales a que haya lugar.
+            </div>
+
+                <br><br><br><br>
+                <div class="texto-negritas centrar-texto">ATENTAMENTE</div>
+                <br>
+                <div class="texto-negritas texto-lg centrar-texto">Departamento de Carrera Policial</div>
+    
+         </div>
+
+
 
     </div>
 

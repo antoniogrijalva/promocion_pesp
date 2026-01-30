@@ -17,6 +17,11 @@ class Convocatoria extends Model
         'puesto_solicitado',
         'observaciones',
         'periodo_id',
+        'cancelada',
+        'fecaha_cancelacion',
+        'motivo_cancelacion',
+
+        
 
         'acreditacion_cup_fecha',
         'acreditacion_cup_vigencia',
@@ -38,6 +43,9 @@ class Convocatoria extends Model
     protected $casts = [
         'acreditacion_cup_fecha' => 'date',
         'acreditacion_cup_vigencia' => 'date',
+
+        'cancelada' => 'boolean',
+        'fecha_cancelacion' => 'date',
 
         'puesto_fecha' => 'date',
                
