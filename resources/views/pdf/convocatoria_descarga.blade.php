@@ -109,6 +109,10 @@
         .texto-italicas {
             font-style: italic;
         }
+
+        .texto-gris{
+            color: #888888;
+        }
         
         .recuadro-fondo {
             /* border: .5px solid #555555; */
@@ -224,7 +228,7 @@
                 {{-- pie de pagina --}}
                  
                 <table>
-                    <tr>
+                    <tr class="texto-gris">
                         <td style="width: 70%; text-align: left; font-size: 8pt;">
                             SISTEMA INTEGRAL DE DESARROLLO POLICIAL DEL ESTADO DE SONORA
                         </td>

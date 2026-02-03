@@ -126,13 +126,80 @@
                 </div>
             </div>
         </main>
+
+        <!-- //nuevo modal de confirmacion de eliminacion -->
+            <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                    <h2 class="text-xl font bold mb-4">Confirmar Cancelación</h2>
+                    <p class="mb-4">Por favor, ingrese el motivo de la cancelación para el folio <strong>{{ convocatoriaAEliminar.id }}</strong>:</p>
+                    <textarea
+                        v-model="motivoCancelacion"
+                        class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+                        rows="4"
+                        placeholder="Motivo de cancelación"
+                    ></textarea>
+                    <div class="flex justify-end gap-2">
+                        <button
+                            @click="showModal = false"
+                            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            @click="confirmarEliminacion"
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                        >
+                            Confirmar Cancelación
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- motivo de cancelacion -->
+              <div v-if="showModal_cancelacion" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
+                    <h2 class="text-xl font text-center bold mb-4">Motivo Cancelación</h2>
+                    <hr >
+                    <textarea
+                        v-model="mostrar_motivoCancelacion"
+                        class="w-full border-none _border-gray-300 rounded px-3 py-2 mb-4 text-red-900 text-sm"
+                        rows="5"
+                        placeholder="Motivo de cancelación"
+                    ></textarea>
+                    <div class="flex justify-end gap-2">
+                        <button
+                            @click="showModal_cancelacion = false"
+                            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                        >
+                            Cerrar 
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>
+
+
     </authenticated-layout>
 </template>
+
+
+
+
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router } from '@inertiajs/vue3';
 import { ref, h } from 'vue';
+
+
+
+
+const showModal = ref(false);
+const motivoCancelacion = ref('');
+const convocatoriaAEliminar = ref(null);
+
+const mostrar_motivoCancelacion = ref('');
+const showModal_cancelacion = ref(false);
 
  import * as XLSX from 'xlsx';
 
@@ -210,11 +277,19 @@ const columns = [
         cell: ({ row }) => {
             if (row.original.cancelada) {
                 return h(
-                    'span',
-                    {
-                        class: 'bg-red-600 text-white px-2 py-0.5 rounded text-xs font-semibold'
-                    },
-                    'Folio Cancelado'
+                    'div',
+                    { class: 'flex flex-col items-center gap-2 ' },
+                    [
+                       
+                        h(
+                            'button',
+                            {
+                                class: 'bg-red-700 text-white px-2 py-0.5 rounded hover:bg-gray-600 text-xs',
+                                onClick: () => f_showmodalcancelacion(` ${row.original.motivo_cancelacion || 'No especificado'}`)
+                            },
+                            'Ver Motivo'
+                        )
+                    ]
                 );
             }
             return h(
@@ -261,6 +336,11 @@ function imprimirConvocatoria(convocatoria) {
     window.open(route('convocatorias.pdf', convocatoria.id), '_blank');
 }
 
+function f_showmodalcancelacion(motivo) {
+    mostrar_motivoCancelacion.value = motivo;
+    showModal_cancelacion.value = true;
+}
+
 
 const table = useVueTable({
     data: props.empleados,
@@ -288,15 +368,32 @@ function agregarRegistro() {
     router.visit(route('convocatorias.create'));
 }
 
-function eliminaConvocatoria(convocatoria) {
-    //console.log('Eliminar convocatoria:', convocatoria);
-    // Lógica para eliminar
 
-    if (confirm('¿Está seguro de que desea eliminar este registro?')) {
-        router.delete(route('convocatorias.destroy', convocatoria.id));
-        router.get(route('convocatorias.index') );
-    }
+//nuevo
+function eliminaConvocatoria(convocatoria) {
+    convocatoriaAEliminar.value = convocatoria;
+    motivoCancelacion.value = '';
+    showModal.value = true;
 }
+
+    function confirmarEliminacion() {
+        if (!motivoCancelacion.value.trim()) {
+            alert('Por favor, ingrese un motivo de cancelación.');
+            return;
+        }
+
+        const payload = {
+            motivo: motivoCancelacion.value,
+        };
+
+        router.delete(route('convocatorias.destroy', convocatoriaAEliminar.value.id), {
+            data: payload,
+            onSuccess: () => {
+                router.get(route('convocatorias.index'));
+                showModal.value = false;
+            },
+        });
+    }
 
 
    
@@ -317,6 +414,7 @@ function eliminaConvocatoria(convocatoria) {
             'Folio': emp.id,
             'Fecha Registro': formatearFecha(emp.fecha.split('T')[0]), // Tomar solo la fecha
             'Estatus': emp.cancelada ? 'CANCELADA' : 'ACTIVA',
+            'Motivo de Cancelacion': emp.motivo_cancelacion || '',
             'Convocatoria': emp.periodo?.nombre || '',
             '# Emp.': emp.empleado?.num_empleado || '',
             'Nombre Completo': emp.empleado?.nombre_completo || '',
@@ -333,6 +431,7 @@ function eliminaConvocatoria(convocatoria) {
             'Vigencia CB': formatearFecha(emp.acreditacion_competencias_vigencia.split('T')[0]),
             'Vigencia Ev. Desemp.': formatearFecha(emp.acreditacion_desempeno_vigencia?.split('T')[0]),
             'Vigencia C3': formatearFecha(emp.acreditacion_c3_vigencia.split('T')[0]),
+            
         }));
       
 

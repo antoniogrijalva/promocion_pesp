@@ -149,16 +149,16 @@ class ConvocatoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Convocatoria $convocatoria)
+    public function destroy(Convocatoria $convocatoria, Request $request)
     {
         //elimina la convocatoria
        // $convocatoria->delete();
-       
+       // dd($request->all());
        //cambiar el estado a cancelada
        
        $convocatoria->cancelada = true;
        $convocatoria->fecha_cancelacion = now();
-       $convocatoria->motivo_cancelacion = 'Cancelada por el usuario: ' . auth()->user()->name;
+    $convocatoria->motivo_cancelacion = $request->input('motivo') . "\n\n" . '***Cancelada por el usuario: ' . auth()->user()->name;
        $convocatoria->save();
         return redirect()->route('convocatorias.index')->with('success', 'Convocatoria cancelada exitosamente.');
 
