@@ -288,8 +288,8 @@
                 </tr>
                 <tr>
                     <td class="texto-sm">{{ $convocatorias->acreditacion_competencias_basicas_vigencia > $convocatorias->fecha ? 'VIGENTES' : '' }}</td>    
-                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_basicas_fecha)->format('d/m/Y') }}</td>
-                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_basicas_vigencia)->format('d/m/Y') }}</td>
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_fecha)->format('d/m/Y') }}</td>
+                    <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_vigencia)->format('d/m/Y') }}</td>
                 </tr>
             </table>
 
