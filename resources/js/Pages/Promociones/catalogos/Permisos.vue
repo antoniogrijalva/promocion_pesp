@@ -2,8 +2,14 @@
     <authenticated-layout>
             <template #header> 
                 <div class="flex justify-between items-center _mb-2">
-                    <h1 class="font-bold text-2xl">Permisos de Usuarios</h1>
+                    <h1 class="font-bold text-2xl">Usuarios</h1>
+
+                    <button @click="agregarUsuario" class="bg-gray-900 hover:bg-gray-700 text-white px-2 py-2 text-sm rounded-md ">
+                    + Agregar Usuario
+                    </button>
                 </div>
+
+                
             </template>
         <main class="container mx-auto mt-4">
             <!-- <div class="flex justify-between items-center mb-2">
@@ -31,9 +37,12 @@
                             <td class="border px-4 py-0">{{ user.tipo_usuario }}       </td>
                             <td class="border px-4 py-0 text-center">
                                 <!-- Aquí puedes agregar botones para editar los permisos del usuario -->
-                                <button @click="router.visit(route('permisos_usuarios.edit', user.id))" class="bg-orange-500 hover:bg-orange-400 text-white px-1.5 py-0.5
+                                <button @click="router.visit(route('users.edit', user.id))" class="bg-orange-500 hover:bg-orange-400 text-white px-1.5 py-0.5
                                  text-sm rounded mr-2">
                                     <i class="fas fa-edit"></i>
+                                </button>
+                                <button @click="router.delete(route('users.destroy', user.id))">
+                                    <i class="fas fa-trash-alt text-red-600 hover:text-red-400"></i>
                                 </button>
 
                             </td>
@@ -57,4 +66,8 @@ const props = defineProps({
         default: null
     }
 });
+
+function agregarUsuario() {
+    router.visit(route('users.create'));
+}
 </script>

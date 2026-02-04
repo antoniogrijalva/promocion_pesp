@@ -57,8 +57,8 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
 
                                 <NavLink
-                                    :href="route('permisos_usuarios.index')"
-                                    :active="route().current('permisos_usuarios.index')"
+                                    :href="route('users.index')"
+                                    :active="route().current('users.index')"
                                     v-if="$page.props.auth.user.tipo_usuario==='administrador'"
                                 >
                                     Permisos de Usuarios (admin)
@@ -95,7 +95,7 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink
+                                        <DropdownLink v-if="false"
                                             :href="route('profile.edit')"
                                         >
                                             Profile

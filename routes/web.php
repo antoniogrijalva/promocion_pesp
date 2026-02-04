@@ -59,17 +59,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/convocatorias/{convocatoria}/edit', [ConvocatoriaController::class, 'edit'])->name('convocatorias.edit');
     Route::put('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'update'])->name('convocatorias.update');
     //Route::get('/convocatorias/{convocatoria}/show', [ConvocatoriaController::class, 'show'])->name('convocatorias.show');
-    Route::delete('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'destroy'])->name('convocatorias.destroy');
+   
+    Route::delete('/convocatorias/{convocatoria}', [ConvocatoriaController::class, 'destroy'])
+        ->name('convocatorias.destroy');
+   
    
    Route::get('/convocatorias/pdf/{id}', [ConvocatoriaController::class, 'generarPDF'])->name('convocatorias.pdf');
 
 
 
    //rutas para permisos de usuarios
-   Route::get('/permisos_usuarios', [App\Http\Controllers\PermisoUsuarioController::class, 'index'])->name('permisos_usuarios.index');
+   //Route::get('/permisos_usuarios', [App\Http\Controllers\PermisoUsuarioController::class, 'index'])->name('permisos_usuarios.index');
    Route::get('/permisos_usuarios/{user}/edit', [App\Http\Controllers\PermisoUsuarioController::class, 'edit'])->name('permisos_usuarios.edit');
    Route::put('/permisos_usuarios/{user}', [App\Http\Controllers\PermisoUsuarioController::class, 'update'])->name('permisos_usuarios.update');
-   
+
+});
+
+
+Route::middleware(['auth', 'can:isAdmin'])->group(function () {
+    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
 });
 
 

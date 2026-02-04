@@ -188,8 +188,8 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { router } from '@inertiajs/vue3';
-import { ref, h } from 'vue';
+import { router,usePage } from '@inertiajs/vue3';
+import { ref, h,watch } from 'vue';
 
 
 
@@ -216,6 +216,18 @@ const props = defineProps({
     empleados: Array 
 
 });
+
+/* para descargar pdf cuando venga desde la captura */
+// Agregar este código para detectar el flash message y descargar el PDF
+const page = usePage();
+
+watch(() => page.props.flash?.descargarPdf, (id) => {
+    if (id) {
+        //window.location.href = route('convocatorias.pdf', id);
+        window.open(route('convocatorias.pdf', id), '_blank');
+    }
+}, { immediate: true });
+
 
 const globalFilter = ref('');
 const pageSize = ref(20);
@@ -294,7 +306,7 @@ const columns = [
             }
             return h(
                 'div',
-                { class: 'flex gap-2' },
+                { class: 'flex items-center justify-center gap-2' },
                 [
                     h('button',
                         {
@@ -312,13 +324,16 @@ const columns = [
                         },
                         h('i', { class: 'fas fa-sm fa-print' })
                     ),
-                    h('button',
-                        {
-                            class: 'bg-red-800 text-white px-2 _py-1 rounded hover:bg-red-600',
-                            onClick: () => eliminaConvocatoria(row.original),
-                            title: 'Eliminar'
-                        },
-                        h('i', { class: 'fas fa-sm fa-trash' })
+                    ...(page.props.auth.user.tipo_usuario === 'administrador' || page.props.auth.user.tipo_usuario === 'supervisor'
+                        ? [h('button',
+                            {
+                                class: 'bg-red-800 text-white px-2 _py-1 rounded hover:bg-red-600',
+                                onClick: () => eliminaConvocatoria(row.original),
+                                title: 'Eliminar'
+                            },
+                            h('i', { class: 'fas fa-sm fa-trash' })
+                        )]
+                        : []
                     ),
                 ]
             );

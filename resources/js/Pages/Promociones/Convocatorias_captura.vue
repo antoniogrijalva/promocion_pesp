@@ -308,7 +308,7 @@
     import { ref,computed } from 'vue';
 
     
-    const page = usePage();
+   
 
     const props = defineProps({
         c_empleados: {
@@ -510,6 +510,9 @@
          } else {
             // Crear nuevo registro
             router.post(route('convocatorias.store'), convocatoria.value);
+           
+
+            
         }
     };
 

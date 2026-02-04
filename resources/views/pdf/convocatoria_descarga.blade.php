@@ -213,7 +213,7 @@
 
                 <br><br><br>
                 <div class="texto-negritas centrar-texto">ATENTAMENTE</div>
-                <br><br><br>
+                <br>
                 
                 <div  class="container-convocatoria centrar-texto">
                     <hr>
@@ -226,13 +226,13 @@
             
             <div>
                 {{-- pie de pagina --}}
-                 
+                <br><br>
                 <table>
-                    <tr class="texto-gris">
-                        <td style="width: 70%; text-align: left; font-size: 8pt;">
+                    <tr class="texto-gris texto-italicas">
+                        <td style="width: 70%; text-align: left; font-size: 7pt;">
                             SISTEMA INTEGRAL DE DESARROLLO POLICIAL DEL ESTADO DE SONORA
                         </td>
-                        <td style="width: 30%; text-align: right; font-size: 8pt;">
+                        <td style="width: 30%; text-align: right; font-size: 7pt;">
                             {{ $convocatorias->periodo->nombre }}
                         </td>
                     </tr>
@@ -259,6 +259,7 @@
         </div>
 
         <br>
+      
          <div class="texto-sm texto-derecha texto-italicas"><b>Elaboró:</b> {{ $convocatorias->user->name }}</div>
 
          <div class="container-convocatoria">
@@ -276,7 +277,7 @@
                     <td style="width: 20%;" class="texto-negritas">Vigencia</td>
                 </tr>
                 <tr>
-                    <td class="texto-sm">{{ $convocatorias->acreditacion_c3 ? 'APROBADO' : '' }}</td>    
+                    <td class="texto-sm">{{ $convocatorias->acreditacion_c3_vigencia > $convocatorias->fecha ? 'APROBADO' : '' }}</td>    
                     <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_c3_fecha)->format('d/m/Y') }}</td>
                     <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_c3_vigencia)->format('d/m/Y') }}</td>
                 </tr>
@@ -291,7 +292,7 @@
                     <td style="width: 20%;" class="texto-negritas">Vigencia</td>
                 </tr>
                 <tr>
-                    <td class="texto-sm">{{ $convocatorias->acreditacion_competencias_basicas_vigencia > $convocatorias->fecha ? 'VIGENTES' : '' }}</td>    
+                    <td class="texto-sm">{{ $convocatorias->acreditacion_competencias_vigencia > $convocatorias->fecha ? 'VIGENTE' : '--' }}</td>    
                     <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_fecha)->format('d/m/Y') }}</td>
                     <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_competencias_vigencia)->format('d/m/Y') }}</td>
                 </tr>
@@ -306,7 +307,7 @@
                     <td style="width: 20%;" class="texto-negritas">Vigencia</td>
                 </tr>
                 <tr>
-                    <td class="texto-sm">{{ $convocatorias->acreditacion_desempeno_vigencia > $convocatorias->fecha ? 'VIGENTES' : '' }}</td>    
+                    <td class="texto-sm">{{ $convocatorias->acreditacion_desempeno_vigencia > $convocatorias->fecha ? 'VIGENTE' : '--' }}</td>    
                     <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_desempeno_fecha)->format('d/m/Y') }}</td>
                     <td class="texto-sm">{{ \Carbon\Carbon::parse($convocatorias->acreditacion_desempeno_vigencia)->format('d/m/Y') }}</td>
                 </tr>
