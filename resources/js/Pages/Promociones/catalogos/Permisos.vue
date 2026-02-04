@@ -41,7 +41,7 @@
                                  text-sm rounded mr-2">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button @click="router.delete(route('users.destroy', user.id))">
+                                <button @click="eliminaUsuario(user.id)" >
                                     <i class="fas fa-trash-alt text-red-600 hover:text-red-400"></i>
                                 </button>
 
@@ -52,6 +52,28 @@
              </div>
 
         </main>
+
+            <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                    <h2 class="text-xl font bold mb-4">Seguro que deseas eliminar este usuario?</h2>
+                    
+                    <div class="flex justify-end gap-2">
+                        <button
+                            @click="showModal = false"
+                            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            @click="confirmarEliminacion"
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                        >
+                            Confirmar Borrado
+                        </button>
+                    </div>
+                </div>
+            </div>
+
     </authenticated-layout>
 </template>
 
@@ -59,6 +81,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router,usePage } from '@inertiajs/vue3';
 import { ref, h } from 'vue';
+
+const showModal = ref(false);
+const usuarioAEliminar = ref(null);
 
 const props = defineProps({
     c_usuarios: {
@@ -70,4 +95,19 @@ const props = defineProps({
 function agregarUsuario() {
     router.visit(route('users.create'));
 }
+
+
+
+function eliminaUsuario(idusuario) {
+    usuarioAEliminar.value = idusuario; 
+    showModal.value = true;
+}
+
+function confirmarEliminacion() {
+    router.delete(route('users.destroy', usuarioAEliminar.value), {         
+        onSuccess: () => {        
+            showModal.value = false;
+        },
+    });
+    }
 </script>
