@@ -44,8 +44,8 @@
                             </td>
                             <td class="border px-4 py-0 text-center">
                                 <!-- Aquí puedes agregar botones para editar o eliminar el periodo -->
-                                <button @click="router.visit(route('periodos.edit', periodo.id))" class="bg-orange-500 hover:bg-orange-400 text-white px-2 py-1 text-sm rounded mr-2">
-                                    <i class="fas fa-edit"></i>
+                                <button @click="router.visit(route('periodos.edit', periodo.id))" _class="bg-orange-500 hover:bg-orange-400 text-white px-2 py-1 text-sm rounded mr-2">
+                                    <i class="fas fa-lg text-sky-800  fa-edit hover:text-sky-600"></i>
                                 </button>
 
                             </td>

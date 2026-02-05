@@ -194,7 +194,7 @@ const columns = [
         header: 'Acciones',
         cell: ({ row }) => h(
             'div',
-            { class: 'flex gap-2' },
+            { class: 'flex gap-2 items-center justify-center' },
             [
                 /*h('button',
                     {
@@ -206,7 +206,7 @@ const columns = [
                 ),*/
                 h('button',
                     {
-                        class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
+                        class: 'bg-sky-800 text-white px-2 _py-1 rounded hover:bg-sky-600',
                         onClick: () => editarEmpleado(row.original),
                         title: 'Editar empleado'
                     },

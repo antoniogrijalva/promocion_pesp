@@ -37,9 +37,8 @@
                             <td class="border px-4 py-0">{{ user.tipo_usuario }}       </td>
                             <td class="border px-4 py-0 text-center">
                                 <!-- Aquí puedes agregar botones para editar los permisos del usuario -->
-                                <button @click="router.visit(route('users.edit', user.id))" class="bg-orange-500 hover:bg-orange-400 text-white px-1.5 py-0.5
-                                 text-sm rounded mr-2">
-                                    <i class="fas fa-edit"></i>
+                                <button @click="router.visit(route('users.edit', user.id))" class="mr-2">
+                                    <i class="fas fa-lg text-sky-800  fa-edit hover:text-sky-600"></i>
                                 </button>
                                 <button @click="eliminaUsuario(user.id)" >
                                     <i class="fas fa-trash-alt text-red-600 hover:text-red-400"></i>

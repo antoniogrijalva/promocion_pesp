@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-1 grid grid-cols-1 lg:grid-cols-2 p-1 rounded  border bg-red-100 border-red-300 "> 
+                        <div class="mt-1 grid grid-cols-1 lg:grid-cols-2 p-1 rounded  border bg-yellow-50 border-red-500 "> 
                             <div >
                                 <input v-model="empleado.baja" type="checkbox" id="baja" class="rounded">
                                 <label for="baja" class="_block m-1 text-xs "> Baja</label>

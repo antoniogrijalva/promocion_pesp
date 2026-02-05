@@ -70,7 +70,7 @@
                             v-for="cell in row.getVisibleCells()" 
                             :key="cell.id"
                             class="border border-gray-300 px-2 py-0.5 text-[13px]"
-                            :class="{ 'bg-red-200    ': row.original.cancelada }"
+                            :class="{ 'bg-yellow-50 text-red-500    ': row.original.cancelada }"
                         >
                             <FlexRender
                                 :render="cell.column.columnDef.cell"
@@ -248,7 +248,7 @@ const columns = [
         cell: ({ row }) => h('input', {
             type: 'date',
             value: row.original.fecha,
-            class: 'border-0 outline-none bg-transparent w-full p-0 text-xs text-slate-500',
+            class: 'border-0 outline-none bg-transparent w-full p-0 text-xs _text-slate-500',
             readonly: true
         })
     },
@@ -256,7 +256,7 @@ const columns = [
         accessorKey: 'periodo.nombre',
         header: 'Convocatoria',
         cell: ({ getValue }) => h('span', {
-            class: 'text-blue-700'
+            class: 'text-sky-600'
         }, getValue())
     },
     {
@@ -280,7 +280,7 @@ const columns = [
         accessorKey: 'user.name',
         header: 'Capturista',
          cell: ({ getValue }) => h('span', {
-            class: 'text-blue-700 text-xs lowercase'
+            class: ' text-xs lowercase'
         }, getValue())
     },
     {
@@ -296,7 +296,7 @@ const columns = [
                         h(
                             'button',
                             {
-                                class: 'bg-red-700 text-white px-2 py-0.5 rounded hover:bg-gray-600 text-xs',
+                                class: 'bg-gray-900 text-yellow-100 px-2 py-0 rounded hover:bg-gray-700 text-xs',
                                 onClick: () => f_showmodalcancelacion(` ${row.original.motivo_cancelacion || 'No especificado'}`)
                             },
                             'Ver Motivo'
@@ -310,28 +310,28 @@ const columns = [
                 [
                     h('button',
                         {
-                            class: 'bg-yellow-500 text-white px-2 _py-1 rounded hover:bg-yellow-600',
+                            class: '',
                             onClick: () => editarConvocatoria(row.original),
                             title: 'Editar empleado'
                         },
-                        h('i', { class: 'fas fa-sm fa-edit' })
+                        h('i', { class: 'fas fa-lg fa-edit text-sky-700 hover:text-sky-600' })
                     ),
                     h('button',
                         {
-                            class: 'bg-green-600 text-white px-2 _py-1 rounded hover:bg-green-700',
+                            class: '',
                             onClick: () => imprimirConvocatoria(row.original),
                             title: 'Imprimir Registro'
                         },
-                        h('i', { class: 'fas fa-sm fa-print' })
+                        h('i', { class: 'fas fa-lg fa-print text-emerald-800 hover:text-emerald-600' })
                     ),
                     ...(page.props.auth.user.tipo_usuario === 'administrador' || page.props.auth.user.tipo_usuario === 'supervisor'
                         ? [h('button',
                             {
-                                class: 'bg-red-800 text-white px-2 _py-1 rounded hover:bg-red-600',
+                                class: '',
                                 onClick: () => eliminaConvocatoria(row.original),
                                 title: 'Eliminar'
                             },
-                            h('i', { class: 'fas fa-sm fa-trash' })
+                            h('i', { class: 'fas fa-lg fa-trash-alt text-red-600 hover:text-red-400' })
                         )]
                         : []
                     ),

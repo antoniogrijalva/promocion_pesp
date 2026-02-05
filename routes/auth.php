@@ -47,12 +47,13 @@ Route::middleware('auth')->group(function () {
    /*
 
    */
+  /* jaga se quitaron porque ahora solo el admin puede registrar usuarios
     Route::middleware('can:isAdmin')->group(function () {
         Route::get('register', [RegisteredUserController::class, 'create'])
             ->name('register');
 
         Route::post('register', [RegisteredUserController::class, 'store']);
-    });
+    });*/
 
 
 
