@@ -1,15 +1,15 @@
 <template>
     <authenticated-layout>
          <template #header> 
-            <div class="flex justify-between items-center _mb-2">
-               <h1 class="font-bold text-2xl">Registro de participación</h1>
-                <button @click="exportarExcel" class="bg-green-700 hover:bg-green-900 text-white px-2 py-2 text-sm rounded">
+            <div class="flex items-center justify-between _mb-2">
+               <h1 class="text-2xl font-bold">Registro de participación</h1>
+                <button @click="exportarExcel" class="px-2 py-2 text-sm text-white bg-green-700 rounded hover:bg-green-900">
                     <i class="fas fa-lg fa-file-excel "></i> Exportar a excel
                 
                 </button>
 
-                <button @click="agregarRegistro" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 text-sm rounded-md ">
-                    + Agregar Registro
+                <button @click="agregarRegistro" class="px-2 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 ">
+                    + Agregar Registro...
                 </button>
             </div>
         
@@ -18,18 +18,18 @@
            
 
             <!-- Búsqueda -->
-            <div class="mb-4 flex justify-between items-center">
+            <div class="flex items-center justify-between mb-4">
                 <input 
                     id="inputbusqueda"
                     v-model="globalFilter" 
                     type="text" 
                     placeholder="Buscar..." 
-                    class="border border-gray-300 rounded px-4 py-2 w-full max-w-sm"
+                    class="w-full max-w-sm px-4 py-2 border border-gray-300 rounded"
                 />
                 <select 
                     id="select_registros"
                     v-model="pageSize" 
-                    class="border border-gray-300 rounded px-7 text-sm py-2"
+                    class="py-2 text-sm border border-gray-300 rounded px-7"
                     @change="table.setPageSize(Number($event.target.value))"
                 >
                     <option :value="10">mostrar 10 </option>
@@ -39,13 +39,13 @@
                 </select>
             </div>
 
-            <table class="table-auto w-full border-collapse">
-                <thead class="bg-slate-800 text-white">
+            <table class="w-full border-collapse table-auto">
+                <thead class="text-white bg-slate-800">
                     <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
                         <th 
                             v-for="header in headerGroup.headers" 
                             :key="header.id"
-                            class="border border-gray-300 px-4 py-1 cursor-pointer hover:bg-slate-700 text-sm"
+                            class="px-4 py-1 text-sm border border-gray-300 cursor-pointer hover:bg-slate-700"
                             @click="header.column.getToggleSortingHandler()?.($event)"
                         >
                             <div class="flex items-center justify-between">
@@ -82,7 +82,7 @@
             </table>
 
             <!-- Paginación -->
-            <div class="mt-4 flex items-center justify-between">
+            <div class="flex items-center justify-between mt-4">
                 <div class="text-sm text-slate-800">
                     Mostrando {{ table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1 }} 
                     a {{ Math.min((table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize, empleados.length) }} 
@@ -105,14 +105,14 @@
                         ← Anterior
                     </button>
                     
-                    <span class="px-3 py-1 flex items-center text-sky-700">
+                    <span class="flex items-center px-3 py-1 text-sky-700">
                         Página {{ table.getState().pagination.pageIndex + 1 }} de {{ table.getPageCount() }}
                     </span>
                     
                     <button 
                         @click="table.nextPage()"
                         :disabled="!table.getCanNextPage()"
-                        class="px-3 py-1 border bg-slate-200 hover:bg-slate-300 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                        class="px-3 py-1 border rounded bg-slate-200 hover:bg-slate-300 disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                         Siguiente →
                     </button>
@@ -128,13 +128,13 @@
         </main>
 
         <!-- //nuevo modal de confirmacion de eliminacion -->
-            <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-                    <h2 class="text-xl font bold mb-4">Confirmar Cancelación</h2>
+            <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+                    <h2 class="mb-4 text-xl font bold">Confirmar Cancelación</h2>
                     <p class="mb-4">Por favor, ingrese el motivo de la cancelación para el folio <strong>{{ convocatoriaAEliminar.id }}</strong>:</p>
                     <textarea
                         v-model="motivoCancelacion"
-                        class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+                        class="w-full px-3 py-2 mb-4 border border-gray-300 rounded"
                         rows="4"
                         placeholder="Motivo de cancelación"
                     ></textarea>
@@ -147,7 +147,7 @@
                         </button>
                         <button
                             @click="confirmarEliminacion"
-                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                            class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700"
                         >
                             Confirmar Cancelación
                         </button>
@@ -156,13 +156,13 @@
             </div>
 
             <!-- motivo de cancelacion -->
-              <div v-if="showModal_cancelacion" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
-                    <h2 class="text-xl font text-center bold mb-4">Motivo Cancelación</h2>
+              <div v-if="showModal_cancelacion" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div class="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
+                    <h2 class="mb-4 text-xl text-center font bold">Motivo Cancelación</h2>
                     <hr >
                     <textarea
                         v-model="mostrar_motivoCancelacion"
-                        class="w-full border-none _border-gray-300 rounded px-3 py-2 mb-4 text-red-900 text-sm"
+                        class="w-full px-3 py-2 mb-4 text-sm text-red-900 border-none rounded _border-gray-300"
                         rows="5"
                         placeholder="Motivo de cancelación"
                     ></textarea>
